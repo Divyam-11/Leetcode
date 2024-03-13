@@ -1,25 +1,32 @@
-#include <vector>
-using namespace std;
-
 class Solution {
 public:
     int pivotInteger(int n) {
+        if (n == 1) return n;
+
+        vector<int> v;
         int sum = 0;
-        for(int i = 1; i <= n; i++) {
-            sum += i;
+
+        for (int i = 0; i < n; i++) {
+            v.push_back(1 + i);
         }
 
-        vector<int> nums(n + 1, 0);
-        nums[1] = 1;
-        for(int i = 2; i <= n; i++) {
-            nums[i] = i + nums[i - 1];
+        std::vector<int> res;
+
+        for (int i = 0; i < n; i++) {
+            sum += v[i];
+            res.push_back(sum);
         }
 
-        for(int i = 1; i <= n; i++) {
-            if(nums[i - 1] == sum - nums[i]) { // Check the sum to the left and to the right
-                return i;
+        int totalSum = sum; 
+        sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (sum == totalSum - sum - v[i]) {
+                return i + 1; 
             }
+            sum += v[i];
         }
-        return -1; // No pivot integer found
+
+        return -1;  
     }
 };
