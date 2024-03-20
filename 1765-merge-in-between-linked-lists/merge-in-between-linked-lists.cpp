@@ -12,6 +12,7 @@ public:
             }
             else if(count == b){
                 second = temp;
+                break;
             }
             temp = temp->next;
             count++;
