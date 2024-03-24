@@ -1,7 +1,7 @@
 class Solution {
 private:
 
-    bool isSafe1(int row, int col, vector < string > board, int n) {
+    bool isSafe1(int row, int col, vector < string >& board, int n) {
       // check upper element
       int duprow = row;
       int dupcol = col;
