@@ -1,17 +1,31 @@
+#include <vector>
+#include <cmath>
+
 class Solution {
 public:
-    int firstMissingPositive(vector<int>& nums) {
-      unordered_map<int,int> m;
-      int maximum_number = INT_MIN;
-      for(int i = 0 ; i<nums.size();i++) {
-        m[nums[i]]++;
-        maximum_number = max(maximum_number,nums[i]);
-      }
-      for(int i = 0;i<maximum_number;i++){
-        if(m[i] == 0 && i>0 ) return i;
-      }
-      if(maximum_number < 1) return 1;
-            return maximum_number+1;
+    int firstMissingPositive(std::vector<int>& nums) {
+        int n = nums.size();
 
+        // Step 1: Mark negative numbers and zeros as non-existent
+        for(int i = 0; i < n; ++i) {
+            if(nums[i] <= 0)
+                nums[i] = n + 1;
+        }
+
+        // Step 2: Mark visited indices by negating the value at the corresponding index
+        for(int i = 0; i < n; ++i) {
+            int val = std::abs(nums[i]);
+            if(val <= n && nums[val - 1] > 0)
+                nums[val - 1] *= -1;
+        }
+
+        // Step 3: Find the first missing positive integer
+        for(int i = 0; i < n; ++i) {
+            if(nums[i] > 0)
+                return i + 1;
+        }
+
+        // If all positive integers from 1 to n are present, return n + 1
+        return n + 1;
     }
 };
