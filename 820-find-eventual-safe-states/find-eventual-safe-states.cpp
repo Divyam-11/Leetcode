@@ -1,53 +1,40 @@
 class Solution
 {
-private:
-    bool dfs(int node, vector<vector<int>> &graph, vector<int> &visited, vector<int> &pathVisited, vector<int> &check)
-    {
-        visited[node] = 1;
-        pathVisited[node] = 1;
-
-        for (auto it : graph[node])
-        {
-            if (!visited[it])
-            {
-                if (dfs(it, graph, visited, pathVisited, check))
-                {
-                    check[node] = 0;
-                    return true;
-                }
-            }
-            else if (pathVisited[it])
-            {
-                check[node] = 0;
-                return true;
-            }
-        }
-        pathVisited[node] = 0;
-        check[node] = 1;
-        return false;
-    }
-
 public:
     vector<int> eventualSafeNodes(vector<vector<int>> &graph)
     {
-        vector<int> result;
-        vector<int> visited = vector<int>(graph.size(), 0);
-        vector<int> pathVisited = visited;
-        vector<int> check = visited;
+        vector<vector<int>> adjList(graph.size());
+        vector<int> inDegree(graph.size());
         for (int i = 0; i < graph.size(); i++)
         {
-            if (!visited[i])
+            for (auto it : graph[i])
             {
-                dfs(i, graph, visited, pathVisited, check);
+                adjList[it].push_back(i);
+                inDegree[i]++;
             }
         }
+
+        queue<int> q;
+        vector<int> safeNodes;
         for (int i = 0; i < graph.size(); i++)
         {
-            if (check[i] == 1)
+
+            if (inDegree[i] == 0)
+                q.push(i);
+        }
+        while (!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+            safeNodes.push_back(node);
+            for (auto it : adjList[node])
             {
-                result.push_back(i);
+                inDegree[it]--;
+                if (inDegree[it] == 0)
+                    q.push(it);
             }
         }
-        return result;
+        sort(safeNodes.begin(), safeNodes.end());
+        return safeNodes;
     }
 };
