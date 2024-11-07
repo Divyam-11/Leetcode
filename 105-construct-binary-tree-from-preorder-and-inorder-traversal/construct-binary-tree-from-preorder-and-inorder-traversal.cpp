@@ -1,22 +1,33 @@
+class Solution
+{
 
-class Solution {
-private:
-TreeNode* build(vector<int> &preorder,vector<int> &inorder,int & root,int left, int right){
-    if(left > right )return NULL;
-    int pivot = left;
-    while(inorder[pivot] != preorder[root]) pivot++;
-
-
-    root++;
-    TreeNode* newNode = new TreeNode(inorder[pivot]);
-    newNode->left = build(preorder,inorder,root,left,pivot-1);
-    newNode->right = build(preorder,inorder,root,pivot+1,right);
-    return newNode;
-}
-public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int rootIdx = 0;
-        return build(preorder, inorder, rootIdx, 0, inorder.size()-1);
+    TreeNode *helper(vector<int> &preorder, vector<int> &inorder, int &root_index)
+    {
+        if (inorder.empty())
+            return NULL;
+        int node = preorder[root_index];
+        root_index++;
+        int inorder_root_index = -1;
+        for (int i = 0; i < inorder.size(); i++)
+        {
+            if (node == inorder[i])
+            {
+                inorder_root_index = i;
+                break;
+            }
+        }
+    vector<int> left_inorder(inorder.begin(), inorder.begin() + inorder_root_index);
+        vector<int> right_inorder(inorder.begin() + inorder_root_index + 1, inorder.end());
+        TreeNode *root = new TreeNode(node);
+        root->left = helper(preorder, left_inorder, root_index);
+        root->right = helper(preorder, right_inorder, root_index);
+        return root;
     }
 
+public:
+    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
+    {
+        int root_index = 0;
+        return helper(preorder, inorder, root_index);
+    }
 };
