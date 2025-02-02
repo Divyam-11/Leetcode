@@ -3,25 +3,19 @@ class Solution
 public:
     bool check(vector<int> &nums)
     {
+        bool drop = false;
         int n = nums.size();
-
-        for (int i = 0; i < n; i++)  
+        for (int i = 0; i < nums.size(); i++)
         {
-            vector<int> temp;
-            int j = i;
-
-            // Rotate and store elements in temp
-            do
+            if (nums[i] > nums[(i + 1) % n])
             {
-                temp.push_back(nums[j]);
-                j = (j + 1) % n;
-            } while (j != i);
-
-            // Check if rotated array is sorted
-            if (is_sorted(temp.begin(), temp.end()))
-                return true;
+                if (drop)
+                {
+                    return false;
+                }
+                drop = true;
+            }
         }
-
-        return false;
+        return true;
     }
 };
