@@ -14,21 +14,21 @@ public:
     int maximumSum(vector<int> &nums)
     {
         int result = -1;
-        unordered_map<int, int> sum_tracker; // {sum,index}
+        vector<int> sum_tracker(82, -1);
         for (int i = 0; i < nums.size(); i++)
         {
             int sum = sumOfDigits(nums[i]);
-            if (sum_tracker.find(sum) != sum_tracker.end())
+            if (sum_tracker[sum] != -1)
             {
                 int index = sum_tracker[sum];
-                result = max(result, nums[i] + nums[index]);
+                result = max(result, nums[index] + nums[i]);
                 if (nums[i] > nums[index])
                 {
                     sum_tracker[sum] = i;
                 }
             }
             else
-            sum_tracker[sum] = i;
+                sum_tracker[sum] = i;
         }
         return result;
     }
