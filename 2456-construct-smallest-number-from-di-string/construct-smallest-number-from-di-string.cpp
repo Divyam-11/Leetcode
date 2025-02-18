@@ -1,14 +1,17 @@
-#include <iostream>
-#include <bits/stdc++.h>
-using namespace std;
 class Solution
 {
 private:
     string result;
     void func(string pattern, vector<int> &used, string &ans)
     {
+        if (!result.empty())
+            return;
         if (ans.size() == pattern.size() + 1)
         {
+            if (result.empty())
+            {
+                result = ans;
+            }
             result = min(result, ans);
             return;
         }
@@ -51,7 +54,7 @@ private:
 public:
     string smallestNumber(string pattern)
     {
-        result = "9999999999999";
+        result = "";
 
         vector<int> used(10, 0);
         for (int i = 1; i <= 9; i++)
