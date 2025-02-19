@@ -1,70 +1,23 @@
 class Solution
 {
-private:
-    string result;
-    void func(string pattern, vector<int> &used, string &ans)
-    {
-        if (!result.empty())
-            return;
-        if (ans.size() == pattern.size() + 1)
-        {
-            if (result.empty())
-            {
-                result = ans;
-            }
-            result = min(result, ans);
-            return;
-        }
-        int j = ans.size() - 1;
-        bool pick = false;
-        if (pattern[j] == 'I')
-        {
-            int num = ans.back() - '0';
-            for (int i = num; i < 10; i++)
-            {
-                if (!used[i])
-                {
-
-                    ans.push_back(i + '0');
-                    used[i] = true;
-                    func(pattern, used, ans);
-                    ans.pop_back();
-                    used[i] = false;
-                }
-            }
-        }
-        else
-        {
-            int num = ans.back() - '0';
-            for (int i = 1; i < num; i++)
-            {
-                if (!used[i])
-                {
-
-                    ans.push_back(i + '0');
-                    used[i] = true;
-                    func(pattern, used, ans);
-                    ans.pop_back();
-                    used[i] = false;
-                }
-            }
-        }
-    }
-
 public:
     string smallestNumber(string pattern)
     {
-        result = "";
-
-        vector<int> used(10, 0);
-        for (int i = 1; i <= 9; i++)
+        stack<int> st;
+        string result;
+        for (int i = 0; i < pattern.size()+1 ; i++)
         {
-            string ans = "";
-            ans.push_back(i + '0');
-            used[i] = true;
-            func(pattern, used, ans);
-            ans.pop_back();
-            used[i] = false;
+            st.push(i + 1);
+            while (!st.empty() && pattern[i] == 'I')
+            {
+                result.push_back(st.top() + '0');
+                st.pop();
+            }
+        }
+        while (!st.empty())
+        {
+            result.push_back(st.top() + '0');
+            st.pop();
         }
         return result;
     }
