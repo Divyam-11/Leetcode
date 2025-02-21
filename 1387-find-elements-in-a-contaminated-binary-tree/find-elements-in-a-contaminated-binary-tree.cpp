@@ -1,22 +1,20 @@
 class FindElements {
 public:
-TreeNode* temp;
-unordered_map<int,int> mp;
-    void inorder(TreeNode* root , int value){
-        if(!root) return ;
-        inorder(root->left,2 * value + 1);
-        root->val = value;
-        mp[value]++;
-        inorder(root->right,2 * value + 2);
-
-    }
+    unordered_set<int> values;
+    
     FindElements(TreeNode* root) {
-        temp = root;
-        inorder(root,0);
+        recover(root, 0);
     }
-
+    
+    void recover(TreeNode* node, int val) {
+        if (!node) return;
+        node->val = val;
+        values.insert(val);
+        recover(node->left, 2 * val + 1);
+        recover(node->right, 2 * val + 2);
+    }
+    
     bool find(int target) {
-        if(mp[target] != 0) return true;
-        return false;
+        return values.find(target) != values.end();
     }
 };
