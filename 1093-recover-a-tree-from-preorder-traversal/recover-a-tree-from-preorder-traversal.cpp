@@ -1,39 +1,41 @@
-class Solution
-{
+class Solution {
 public:
-    TreeNode *build(queue<pair<int, int>> &mp, int depth)
-    {
-        if (depth != mp.front().second)
-            return nullptr;
-        TreeNode *root = new TreeNode(mp.front().first);
-        mp.pop();
-        root->left = build(mp, depth + 1);
-        root->right = build(mp, depth + 1);
-        return root;
+    TreeNode* recoverFromPreorder(string traversal) {
+        int index = 0;
+        return helper(traversal, index, 0);
     }
-    TreeNode *recoverFromPreorder(string traversal)
-    {
-        queue<pair<int, int>> mp;
-        int depth = 0;
-        for (int i = 0; i < traversal.size(); i++)
-        {
-            if (traversal[i] != '-')
-            {
-                string num;
-                while (traversal[i] != '-' && i< traversal.size())
-                {
-                    num.push_back(traversal[i]);
-                    i++;
-                }
-                i--;
 
-                cout << num << " " << depth << endl;
-                mp.push({stoi(num), depth});
-                depth = 0;
-            }
-            else
-                depth++;
+private:
+    TreeNode* helper(const string& traversal, int& index, int depth) {
+        if (index >= traversal.size()) return nullptr;
+
+        // Count the number of dashes
+        int dashCount = 0;
+        while (index + dashCount < traversal.size() &&
+               traversal[index + dashCount] == '-') {
+            dashCount++;
         }
-        return build(mp, 0);
+
+        // If the number of dashes doesn't match the current depth, return null
+        if (dashCount != depth) return nullptr;
+
+        // Move index past the dashes
+        index += dashCount;
+
+        // Extract the node value
+        int value = 0;
+        while (index < traversal.size() && isdigit(traversal[index])) {
+            value = value * 10 + (traversal[index] - '0');
+            index++;
+        }
+
+        // Create the current node
+        TreeNode* node = new TreeNode(value);
+
+        // Recursively build the left and right subtrees
+        node->left = helper(traversal, index, depth + 1);
+        node->right = helper(traversal, index, depth + 1);
+
+        return node;
     }
 };
