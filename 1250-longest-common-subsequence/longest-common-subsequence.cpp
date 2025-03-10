@@ -20,7 +20,8 @@ public:
     }
     int longestCommonSubsequence(string text1, string text2)
     {
-        vector<vector<int>> dp(1001, vector<int>(1001, -1));
-        return solve(text1.size(), text2.size(), text1, text2, dp);
+        int n = text1.size(), m = text2.size();
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
+        return solve(n, m, text1, text2, dp);
     }
 };
