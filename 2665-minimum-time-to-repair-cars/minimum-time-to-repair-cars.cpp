@@ -1,26 +1,35 @@
-class Solution {
+class Solution
+{
+    bool isValid(vector<int> &ranks, long long k, int cars)
+    {
+        long long total_cars = 0;
+        for (int i = 0; i < ranks.size(); i++)
+        {
+            long long temp = (long long)sqrt((k / ranks[i]));
+            total_cars += temp;
+        }
+        return total_cars >= (long long)cars;
+    }
+
 public:
-    long long repairCars(vector<int>& ranks, int cars) {
-        long long left = 1, right = (long long)*min_element(ranks.begin(), ranks.end()) * cars * cars;
-        
-        auto can_repair_all = [&](long long time) {
-            long long total_cars_repaired = 0;
-            for (int rank : ranks) {
-                total_cars_repaired += sqrt(time / rank);
-                if (total_cars_repaired >= cars) return true;
+    long long repairCars(vector<int> &ranks, int cars)
+    {
+        long long result = 0;
+        long long r = LLONG_MAX;
+        long long l = 0;
+        while (l <= r)
+        {
+            long long mid = l - (l - r) / 2;
+            if (isValid(ranks, mid, cars))
+            {
+                result = mid;
+                r = mid - 1;
             }
-            return false;
-        };
-        
-        while (left < right) {
-            long long mid = (left + right) / 2;
-            if (can_repair_all(mid)) {
-                right = mid;
-            } else {
-                left = mid + 1;
+            else
+            {
+                l = mid + 1;
             }
         }
-        
-        return left;
+        return result;
     }
 };
