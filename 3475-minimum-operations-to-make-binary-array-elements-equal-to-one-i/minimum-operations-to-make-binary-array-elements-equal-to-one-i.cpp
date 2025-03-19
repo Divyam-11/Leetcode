@@ -14,11 +14,7 @@ public:
                 result++;
             }
         }
-        for (int i = 0; i < nums.size(); i++)
-        {
-            if (nums[i] == 0)
-                return -1;
-        }
+    if(nums[nums.size()-1] == 0 || nums[nums.size()-2] == 0) return -1;
         return result;
     }
 };
