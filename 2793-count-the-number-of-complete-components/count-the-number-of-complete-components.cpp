@@ -1,51 +1,97 @@
+class DisjointSet
+{
+public:
+    vector<int> rank, size, parent;
+
+    DisjointSet(int n)
+    {
+        rank.resize(n + 1, 0);
+        size.resize(n + 1, 1);
+        parent.resize(n + 1, 0);
+        for (int i = 0; i <= n; i++)
+        {
+            parent[i] = i;
+        }
+    }
+
+    int findUPar(int node)
+    {
+        if (node == parent[node])
+            return node;
+        return parent[node] = findUPar(parent[node]);
+    }
+
+    void unionByRank(int u, int v)
+    {
+        int pu = findUPar(u);
+        int pv = findUPar(v);
+        if (pu == pv)
+        {
+            return;
+        }
+        if (rank[pu] == rank[pv])
+        {
+            parent[pv] = pu;
+            rank[pu]++;
+        }
+        else if (rank[pu] > rank[pv])
+        {
+            parent[pv] = pu;
+        }
+        else
+        {
+            parent[pu] = pv;
+        }
+    }
+
+    void unionBySize(int u, int v)
+    {
+        int pu = findUPar(u);
+        int pv = findUPar(v);
+        if (pu == pv)
+        {
+            return;
+        }
+        if (size[pu] >= size[pv])
+        {
+            parent[pv] = pu;
+            size[pu] += size[pv];
+        }
+        else
+        {
+            parent[pu] = pv;
+            size[pv] += size[pu];
+        }
+    }
+};
 class Solution
 {
-    void dfs(int node, vector<vector<int>> &adjList, unordered_set<int> &nodes, vector<int> &visited)
-    {
-        if (visited[node])
-            return;
-        visited[node] = true;
-        nodes.insert(node);
-        for (int i = 0; i < adjList[node].size(); i++)
-        {
-            dfs(adjList[node][i], adjList, nodes, visited);
-        }
-        return;
-    }
 
 public:
     int countCompleteComponents(int n, vector<vector<int>> &edges)
     {
-        int CompleteComponents = 0;
-        vector<vector<int>> adjList(n);
+        int result = 0;
+        unordered_map<int, int> edgeCount;
+        DisjointSet ds(n);
         for (int i = 0; i < edges.size(); i++)
         {
-            adjList[edges[i][0]].push_back(edges[i][1]);
-            adjList[edges[i][1]].push_back(edges[i][0]);
+            ds.unionBySize(edges[i][0], edges[i][1]);
         }
-
-        vector<int> visited(n);
-        for (int i = 0; i < adjList.size(); i++)
+        for (int i = 0; i < edges.size(); i++)
         {
-            if (!visited[i])
+            int root = ds.findUPar(edges[i][0]);
+            edgeCount[root]++;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (ds.findUPar(i) == i)
             {
-                unordered_set<int> nodes;
-                dfs(i, adjList, nodes, visited);
-                int edgesCount = 0;
-                for (int i = 0; i < adjList.size(); i++)
-                {
-                    if (nodes.find(i) != nodes.end())
-                    {
-                        edgesCount += adjList[i].size();
-                    }
-                }
-                edgesCount /= 2;
-                if (edgesCount == ((nodes.size() * (nodes.size() - 1)) / 2))
-                {
-                    CompleteComponents++;
-                }
+                int v_count = ds.size[i];
+                int e_count = edgeCount[i];
+                if (e_count == ((v_count) * (v_count - 1)) / 2)
+                    result++;
             }
         }
-        return CompleteComponents;
+        return result;
     }
 };
