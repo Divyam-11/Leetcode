@@ -4,12 +4,11 @@ public:
     vector<int> partitionLabels(string s)
     {
         vector<int> answer;
-        vector<int> first_index(26, -1);
+        
         vector<int> last_index(26);
         for (int i = 0; i < s.size(); i++)
         {
-            if (first_index[s[i] - 'a'] == -1)
-                first_index[s[i] - 'a'] = i;
+
             last_index[s[i] - 'a'] = i;
         }
         int last_subarray_index = 0;
