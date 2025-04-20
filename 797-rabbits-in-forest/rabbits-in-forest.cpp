@@ -1,39 +1,18 @@
-class Solution
-{
+class Solution {
 public:
-    int numRabbits(vector<int> &answers)
-    {
-        vector<pair<int, int>> mera_map;
-        for (int i = 0; i < answers.size(); i++)
-        {
-            if (mera_map.empty())
-            {
-                mera_map.push_back({answers[i] + 1, 1});
-            }
-            // check if description fits
-            else
-            {
-                bool check = false;
-                for (int j = 0; j < mera_map.size(); j++)
-                {
-                    if (mera_map[j].first == answers[i] + 1 && mera_map[j].second < answers[i] + 1)
-                    {
-                        mera_map[j].second++;
-                        check = true;
-                        break;
-                    }
-                }
-                if (!check)
-                {
-                    mera_map.push_back({answers[i] + 1, 1});
-                }
+    int numRabbits(vector<int> &answers) {
+        unordered_map<int, int> count_map;
+        int total = 0;
+
+        for (int ans : answers) {
+            if (count_map[ans] == 0) {
+                total += ans + 1;  // new group starts
+                count_map[ans] = ans;
+            } else {
+                count_map[ans]--;  // fill existing group
             }
         }
-        int count = 0;
-        for (int i = 0; i < mera_map.size(); i++)
-        {
-            count += mera_map[i].first;
-        }
-        return count;
+
+        return total;
     }
 };
