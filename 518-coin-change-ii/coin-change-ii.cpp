@@ -1,23 +1,24 @@
-class Solution
-{
+class Solution {
 public:
-    int helper(int index, int amount, vector<int> &coins, vector<vector<int>> &dp)
-    {
-        if (amount == 0)
-            return 1;
-        if (amount < 0 || index < 0)
-            return 0;
-        if (dp[index][amount] != -1)
-        {
-            return dp[index][amount];
-        }
-        int pick = helper(index, amount - coins[index], coins, dp);
-        int not_pick = helper(index - 1, amount, coins, dp);
-        return dp[index][amount] = pick + not_pick;
-    }
     int change(int amount, vector<int> &coins)
     {
-        vector<vector<int>> dp(coins.size(), vector<int>(amount + 1, -1));
-        return helper(coins.size() - 1, amount, coins, dp);
+        vector<vector<long long>> dp(coins.size() + 1, vector<long long>(amount + 1, 0));
+        dp[0][0] = 1;
+        for (int i = 1; i < dp.size(); i++)
+        {
+            for (int j = 0; j < dp[0].size(); j++)
+            {
+                int pick = 0;
+                int not_pick = 0;
+                if (j >= coins[i - 1])
+
+                {
+                    pick = dp[i][j - coins[i - 1]];
+                }
+                not_pick = dp[i - 1][j];
+                dp[i][j] = (long long) pick + (long long)not_pick;
+            }
+        }
+        return dp.back().back();
     }
 };
