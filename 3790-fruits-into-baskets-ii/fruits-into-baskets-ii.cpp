@@ -10,8 +10,8 @@ public:
             for (int j = 0; j < baskets.size(); j++)
             {
                 if (baskets[j] >= fruits[i])
-                {   cout<<i<<"" <<j<<endl;
-                    placed++;
+                {  
+                     placed++;
                     baskets[j] *= -1;
                     break;
                 }
