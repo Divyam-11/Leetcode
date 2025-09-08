@@ -2,7 +2,7 @@ class Solution
 {
 public:
     bool hasZero(int num)
-    {   cout<<num<<endl;
+    {   
         while (num != 0)
         {
             int dig = num % 10;
@@ -10,7 +10,7 @@ public:
             if (dig == 0)
                 return true;
         }
-        cout<<"true"<<endl;
+        
         return false;
     }
     vector<int> getNoZeroIntegers(int n)
