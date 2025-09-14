@@ -9,7 +9,14 @@ public:
         for (int i = 0; i < arrivals.size(); i++)
         {
             
-
+            int window = i - l + 1;
+            
+            if (window > w)
+            { 
+                mp[arrivals[l]]--; 
+                l++;
+                
+            }
             int item = arrivals[i];
             if (mp[item] == m)
             { 
@@ -19,14 +26,6 @@ public:
             else
             {
                 mp[item]++;
-            }
-                        int window = i - l + 1;
-            
-            if (window == w)
-            { 
-                mp[arrivals[l]]--; 
-                l++;
-                
             }
         }
         return discard;
