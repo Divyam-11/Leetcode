@@ -15,7 +15,7 @@ public:
         }
         int res = INT_MIN;
         for (int i = energy.size() - 1; k>0; i--)
-        {   cout<<dp[i]<<endl;
+        {   
             res = max(res, dp[i]);
             k--;
         }
