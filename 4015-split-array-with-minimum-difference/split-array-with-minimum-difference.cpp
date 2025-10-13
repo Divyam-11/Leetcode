@@ -15,7 +15,7 @@ public:
             if (nums[i] > nums[i - 1] && isLeft[i - 1])
                 isLeft[i] = true;
         }
-        cout<<endl;
+        
         long long t_sum = prefix_sum.back();
         for (int i = nums.size() - 2; i >= 0; i--)
         {
