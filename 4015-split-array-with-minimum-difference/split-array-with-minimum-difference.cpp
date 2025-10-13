@@ -23,7 +23,7 @@ public:
             {
                 isRight[i] = true;
             }
-            cout<<isRight[i]<<" ";
+            
         }
         cout<<endl;
         long long result = LLONG_MAX;
