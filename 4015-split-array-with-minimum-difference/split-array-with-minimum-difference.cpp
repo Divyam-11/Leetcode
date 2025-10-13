@@ -33,7 +33,7 @@ public:
             if (isLeft[i] && isRight[i + 1])
             {   
 
-                cout<<isLeft[i]<<" "<<isRight[i+1]<<" "<<prefix_sum[i]<<endl;
+                
                 long long temp = abs(t_sum - prefix_sum[i] - prefix_sum[i]);
 
                 result = min(result, temp);
