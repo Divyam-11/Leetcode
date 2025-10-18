@@ -4,20 +4,18 @@ public:
     int maxDistinctElements(vector<int> &nums, int k)
     {
         sort(nums.begin(), nums.end());
-        int max_till_now = nums[0] - k;
-        set<int> st;
-        st.insert(max_till_now);
+        int count = 1;
+        int last = nums[0] - k;
+
         for (int i = 1; i < nums.size(); i++)
         {
-            int temp = max(max_till_now + 1, nums[i] - k);
-            if (temp > nums[i] + k)
+            int next = max(last + 1, nums[i] - k);
+            if (next <= nums[i] + k)
             {
-                st.insert(nums[i]);
-                continue;
+                count++;
+                last = next;
             }
-            max_till_now = temp;
-            st.insert(max_till_now);
         }
-        return st.size();
+        return count;
     }
 };
