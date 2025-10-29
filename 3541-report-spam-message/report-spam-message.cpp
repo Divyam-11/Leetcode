@@ -15,6 +15,7 @@ public:
             {
                 count++;
             }
+            if(count  > 1) return true;
         }
         return count > 1;
     }
