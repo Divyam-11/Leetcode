@@ -4,6 +4,7 @@ public:
     bool reportSpam(vector<string> &message, vector<string> &bannedWords)
     {
         unordered_set<string> st;
+        st.reserve(bannedWords.size() * 2);
         for (auto i : bannedWords)
         {
             st.insert(i);
