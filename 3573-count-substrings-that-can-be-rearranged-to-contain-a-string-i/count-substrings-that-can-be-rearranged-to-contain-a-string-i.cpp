@@ -8,7 +8,6 @@ public:
             if (freq[i] < word2_freq[i])
                 return false;
         }
-        cout<<"hi"<<endl;
         return true;
     }
     long long validSubstringCount(string word1, string word2)
