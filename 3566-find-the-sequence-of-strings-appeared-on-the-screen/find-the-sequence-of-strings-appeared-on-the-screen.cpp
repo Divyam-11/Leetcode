@@ -6,9 +6,10 @@ public:
         vector<string> res;
         res.push_back("a");
         int ptr = 0;
+        string b = "";
         while (res.back() != target)
         {
-            string b = res.back();
+             b = res.back();
             if (b.back() < target[ptr])
             {
                 b[b.size() - 1]++;
