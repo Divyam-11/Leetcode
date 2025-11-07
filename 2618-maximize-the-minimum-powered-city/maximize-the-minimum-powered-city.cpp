@@ -3,7 +3,7 @@ class Solution
 public:
     bool isValid(long long mid, int r, int k, vector<int> &stations)
     {
-        cout<<"wee"<<endl;
+        
         vector<long long> sweep(stations.size());
         for (int i = 0; i < stations.size(); i++)
         {
