@@ -1,27 +1,9 @@
 class Solution
 {
 public:
-    bool isValid(long long mid, int r, int k, vector<int> &stations)
+    bool isValid(long long mid, int r, int k, vector<long long> sweep)
     {
-        
-        vector<long long> sweep(stations.size());
-        for (int i = 0; i < stations.size(); i++)
-        {
-            int lb = i - r;
-            int ub = i + r + 1;
-            if (lb >= 0)
-            {
-                sweep[lb] += stations[i];
-            }
-            else
-            {
-                sweep[0] += stations[i];
-            }
-            if (ub < stations.size())
-            {
-                sweep[ub] += -1 * stations[i];
-            }
-        }
+
         long long curr_power = 0;
         for (int i = 0; i < sweep.size(); i++)
         {
@@ -48,10 +30,28 @@ public:
         long long low = 0;
         long long ans = 0;
         long long high = 1e12;
+        vector<long long> sweep(stations.size());
+        for (int i = 0; i < stations.size(); i++)
+        {
+            int lb = i - r;
+            int ub = i + r + 1;
+            if (lb >= 0)
+            {
+                sweep[lb] += stations[i];
+            }
+            else
+            {
+                sweep[0] += stations[i];
+            }
+            if (ub < stations.size())
+            {
+                sweep[ub] += -1 * stations[i];
+            }
+        }
         while (low <= high)
         {
             long long mid = high - (high - low) / 2;
-            if (isValid(mid, r, k, stations))
+            if (isValid(mid, r, k, sweep))
             {
                 ans = mid;
                 low = mid + 1;
