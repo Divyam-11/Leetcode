@@ -13,24 +13,17 @@ public:
             dfs1(i.first, adjList2, mp, value * i.second, visited, rates);
         }
     }
-
     void dfs2(int node, vector<vector<pair<int, double>>> &adjList2, unordered_map<string, int> &mp, double value, vector<int> &visited, vector<double> &rates)
     {
         if (visited[node])
             return;
         visited[node] = 1;
-    if (rates[node] != 0) {
-        ans = max(ans, value / rates[node]);
-    }
-
+        ans = max(ans, value * (1 / rates[node]));
         for (auto i : adjList2[node])
         {
-        
             dfs2(i.first, adjList2, mp, value * i.second, visited, rates);
-        
         }
     }
-
     double maxAmount(string initialCurrency, vector<vector<string>> &pairs1, vector<double> &rates1, vector<vector<string>> &pairs2, vector<double> &rates2)
     {
         set<string> st;
@@ -40,7 +33,6 @@ public:
             st.insert(pairs1[i][0]);
             st.insert(pairs1[i][1]);
         }
-
         for (int i = 0; i < pairs2.size(); i++)
         {
             st.insert(pairs2[i][0]);
@@ -53,7 +45,7 @@ public:
             mp[i] = ptr;
             ptr++;
         }
-        vector<vector<pair<int, double>>> adjList1(st.size()); // {node,conversion}
+        vector<vector<pair<int, double>>> adjList1(st.size());
         vector<vector<pair<int, double>>> adjList2(st.size());
         for (int i = 0; i < pairs1.size(); i++)
         {
@@ -66,7 +58,7 @@ public:
             adjList2[mp[pairs2[i][1]]].push_back({mp[pairs2[i][0]], 1 / rates2[i]});
         }
         vector<int> visited(adjList1.size());
-        vector<double> rates(adjList1.size());
+        vector<double> rates(adjList1.size(),-1);
         rates[mp[initialCurrency]] = 1;
         dfs1(mp[initialCurrency], adjList2, mp, 1, visited, rates);
         vector<int> visited1(adjList1.size());
