@@ -15,13 +15,13 @@ public:
             if (s[i] == '0')
             {
                 res += (len *1LL* (len + 1)) / 2;
-                res %= MOD;
+                
                 len = 0;
             }
         }
             res += (len * (len + 1)) / 2;
-                res %= MOD;
+                
                 len = 0;
-        return res;
+        return res % MOD;
     }
 };
