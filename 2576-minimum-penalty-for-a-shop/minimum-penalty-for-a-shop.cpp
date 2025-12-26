@@ -21,7 +21,6 @@ public:
         {
             if (prefix[i] + sum < res)
             {
-                cout<<res<<endl;
                 res = prefix[i] + sum;
                 time = i;
             }
