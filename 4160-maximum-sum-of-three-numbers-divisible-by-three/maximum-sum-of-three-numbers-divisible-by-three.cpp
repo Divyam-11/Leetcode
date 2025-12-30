@@ -3,56 +3,41 @@ class Solution
 public:
     int maximumSum(vector<int> &nums)
     {
-        priority_queue<int> mod0;
-        priority_queue<int> mod1;
-        priority_queue<int> mod2;
+        int maxSum = 0;
+        sort(nums.begin(), nums.end(), greater<int>());
+        vector<int> rem0;
+        vector<int> rem1;
+        vector<int> rem2;
         for (int i = 0; i < nums.size(); i++)
         {
             if (nums[i] % 3 == 0)
             {
-                mod0.push(nums[i]);
+                rem0.push_back(nums[i]);
             }
             if (nums[i] % 3 == 1)
             {
-                mod1.push(nums[i]);
+                rem1.push_back(nums[i]);
             }
             if (nums[i] % 3 == 2)
             {
-                mod2.push(nums[i]);
+                rem2.push_back(nums[i]);
             }
         }
-        // 0 1 2
-        int sum = 0;
-        if (!mod0.empty() && !mod1.empty() && !mod2.empty())
-            sum = max(sum, (mod0.top() + mod1.top() + mod2.top()));
-        int mod0_sum = 0;
-        int mod1_sum = 0;
-        int mod2_sum = 0;
-        for (int i = 0; i < 3; i++)
+        if (rem0.size() >= 3)
         {
-            if (mod0.empty())
-                mod0_sum = -1;
-            else
-            {
-                mod0_sum += mod0.top();
-                mod0.pop();
-            }
-            if (mod1.empty())
-                mod1_sum = -1;
-            else
-            {
-                mod1_sum += mod1.top();
-                mod1.pop();
-            }
-            if (mod2.empty())
-                mod2_sum = -1;
-            else
-            {
-                mod2_sum += mod2.top();
-                mod2.pop();
-            }
+            maxSum = rem0[0] + rem0[1] + rem0[2];
         }
-        sum = max({sum, mod0_sum, mod1_sum, mod2_sum});
-        return sum;
-    }
-};
+        if (rem1.size() >= 3)
+        {
+            maxSum = max(maxSum, rem1[0] + rem1[1] + rem1[2]);
+        }
+        if (rem2.size() >= 3)
+        {
+            maxSum = max(maxSum, rem2[0] + rem2[1] + rem2[2]);
+        }
+        if (rem0.size() >= 1 && rem1.size() >= 1 && rem2.size() >= 1)
+        {
+            maxSum = max(maxSum, rem0[0] + rem1[0] + rem2[0]);
+        }
+        return maxSum;
+    }}; 
