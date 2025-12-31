@@ -4,12 +4,13 @@ public:
     bool floodFill(vector<vector<int>> &grid)
     {
         queue<pair<int, int>> q;
+        vector<vector<int>> visited(grid.size(), vector<int>(grid[0].size()));
         for (int i = 0; i < grid[0].size(); i++)
         {
             if (grid[0][i] == 0)
             {
                 q.push({0, i});
-                grid[0][i] = 1;
+                visited[0][i] = 1;
             }
         }
         vector<int> rows = {0, -1, 0, 1};
@@ -19,7 +20,7 @@ public:
             int x = q.front().first;
             int y = q.front().second;
             q.pop();
-
+           
             if (x == grid.size() - 1)
                 return true;
 
@@ -31,10 +32,10 @@ public:
                 {
                     continue;
                 }
-                else if (grid[new_X][new_Y] == 0)
+                else if (grid[new_X][new_Y] == 0 && visited[new_X][new_Y] != 1)
                 {
                     q.push({new_X, new_Y});
-                    grid[new_X][new_Y] = 1;
+                     visited[new_X][new_Y] = 1;
                 }
             }
         }
@@ -68,6 +69,7 @@ public:
                 high = mid - 1;
             }
         }
-        return res+1;
+
+        return res + 1;
     }
 };
