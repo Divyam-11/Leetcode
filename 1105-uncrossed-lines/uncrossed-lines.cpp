@@ -15,6 +15,7 @@ public:
         if (nums1[m] == nums2[n])
         {
             take = 1 + solve(m - 1, n - 1, nums1, nums2);
+            return DP[m][n] = take;
         }
         int left = solve(m - 1, n, nums1, nums2);
         int right = solve(m, n - 1, nums1, nums2);
