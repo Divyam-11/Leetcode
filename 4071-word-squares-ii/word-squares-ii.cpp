@@ -10,6 +10,7 @@ public:
     vector<vector<string>> wordSquares(vector<string> &words)
     {
         vector<vector<string>> result;
+        sort(words.begin(),words.end());
         for (int i = 0; i < words.size(); i++)
         {
             for (int j = 0; j < words.size(); j++)
@@ -36,7 +37,7 @@ public:
                 }
             }
         }
-        sort(result.begin(),result.end());
+        
                return result;
     }
 };
