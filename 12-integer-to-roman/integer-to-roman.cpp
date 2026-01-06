@@ -16,7 +16,7 @@ public:
             {{1, 1}, {0, 2}},
             {{1, 1}, {0, 3}},
             {{0, 1}, {2, 1}}};
-        unordered_map<int, string> mp;
+        vector<string> mp(3);
         mp[0] = "IVX";
         mp[1] = "XLC";
         mp[2] = "CDM";
