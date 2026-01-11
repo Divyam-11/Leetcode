@@ -11,9 +11,9 @@ public:
 
         sort(nums.begin(), nums.end());
         priority_queue<int, vector<int>, greater<int>> pq;
+        unordered_map<int, long long> mp;
         vector<long long> res;
-
-        res.push_back(0);
+        mp[nums[0].first] = 0;
         pq.push(nums[0].second);
         long long sum = pq.top();
 
@@ -23,11 +23,13 @@ public:
             if (nums[i].first == nums[i - 1].first)
             {
 
-                res.push_back(res.back());
+                // res.push_back(res.back());
+                mp[nums[i].first] = mp[nums[i - 1].first];
             }
             else
             {
-                res.push_back(sum);
+                // res.push_back(sum);
+                mp[nums[i].first] = sum;
             }
             pq.push(nums[i].second);
             sum += nums[i].second;
@@ -37,14 +39,9 @@ public:
                 pq.pop();
             }
         }
-        unordered_map<int, long long> mp;
-        for (int i = 0; i < res.size(); i++)
+        for (int i = 0; i < nums1.size(); i++)
         {
-            mp[nums[i].first] = res[i];
-        }
-        for (int i = 0; i < res.size(); i++)
-        {
-            res[i] = mp[nums1[i]];
+            res.push_back(mp[nums1[i]]);
         }
         return res;
     }
