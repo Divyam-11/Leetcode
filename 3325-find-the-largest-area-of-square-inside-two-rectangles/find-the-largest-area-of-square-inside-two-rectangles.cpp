@@ -22,7 +22,7 @@ public:
         long long maxArea = 0;
         for (int i = 0; i < bottomLeft.size(); i++)
         {
-            for (int j =0; j < topRight.size(); j++)
+            for (int j =i; j < topRight.size(); j++)
             {
                 if(i == j) continue;
                 int ax1 = bottomLeft[i][0];
