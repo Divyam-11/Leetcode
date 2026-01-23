@@ -10,7 +10,7 @@ public:
         {
             if (s[i] == '(')
             {   
-                cout<<"hey"<<endl;
+               
                 st.push('(');
                 
             }
