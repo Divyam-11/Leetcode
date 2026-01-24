@@ -8,12 +8,12 @@ public:
         q.push({id, 0});
         unordered_map<string, int> mp; // {video,freq}
         vector<int> visited(n);
-        visited[id] =1;
+        
         while (!q.empty())
         {
             int temp_id = q.front().first;
             int lvl = q.front().second;
-
+            visited[temp_id] = 1;
             q.pop();
             if (lvl == level)
             {
@@ -27,10 +27,8 @@ public:
                 for (auto frnd : friends[temp_id])
                 {
                     if (!visited[frnd])
-                    {
-                        q.push({frnd, lvl + 1});
-                        visited[frnd] = 1;
-                    }
+                    {    q.push({frnd, lvl + 1});
+                    visited[frnd] = 1;}
                 }
             }
         }
