@@ -5,32 +5,26 @@ public:
     {
         sort(nums.begin(), nums.end());
         unordered_map<int, int> mp;
-        unordered_map<int, int> first;
-        int maxRem = 0;
         int maxfreq = 0;
+        int maxEle = 0;
         for (int i = 0; i < nums.size(); i++)
         {
-            int rem = nums[i] % space;
-            if (mp.find(rem) == mp.end())
+            int ele = nums[i] % space;
+            mp[nums[i] % space]++;
+            int temp = mp[ele];
+            if (temp > maxfreq)
             {
-                mp[rem]++;
-                first[rem] = nums[i];
-            }
-            else
-                mp[rem]++;
-            if (maxfreq <= mp[rem])
-            {
-                if (maxfreq == mp[rem] && first[rem] < first[maxRem])
-                {
-                    maxRem = rem;
-                }
-                else if (maxfreq < mp[rem])
-                {
-                    maxfreq = mp[rem];
-                    maxRem = rem;
-                }
+                maxfreq = temp;
+                maxEle = ele;
             }
         }
-        return first[maxRem];
+        int res = 0;
+        for(int i = 0 ;i < nums.size();i++){
+
+            if(mp[nums[i] % space ]== maxfreq){
+                return nums[i];
+            }
+        }
+        return maxEle;
     }
 };
