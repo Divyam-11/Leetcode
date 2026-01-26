@@ -3,7 +3,7 @@ class Solution
 public:
     int destroyTargets(vector<int> &nums, int space)
     {
-        sort(nums.begin(), nums.end());
+        
         unordered_map<int, int> mp;
         int maxfreq = 0;
         int maxEle = 0;
@@ -18,13 +18,13 @@ public:
                 maxEle = ele;
             }
         }
-        int res = 0;
+        int res = INT_MAX;
         for(int i = 0 ;i < nums.size();i++){
 
             if(mp[nums[i] % space ]== maxfreq){
-                return nums[i];
+                res = min(nums[i],res);
             }
         }
-        return maxEle;
+        return res;
     }
 };
