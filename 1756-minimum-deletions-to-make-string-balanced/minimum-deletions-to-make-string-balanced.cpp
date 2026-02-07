@@ -33,7 +33,7 @@ public:
             return 0;
         int adel = 0;
         int bdel = 0;
-        cout<<"ayo"<<endl;
+        
         while (l < r && l < s.size() && r >= 0)
         {
             int tempA = aCount[l] - adel;
