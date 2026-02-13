@@ -11,7 +11,7 @@ public:
             st.insert({nums[i], i});
             long long mi = (*st.begin()).first;
             long long mx = (*st.rbegin()).first;
-            while (!st.empty() && (mx - mi) * (i - l + 1) > k)
+            while ((mx - mi) * (i - l + 1) > k)
             {
                 
                 st.erase({nums[l], l});
