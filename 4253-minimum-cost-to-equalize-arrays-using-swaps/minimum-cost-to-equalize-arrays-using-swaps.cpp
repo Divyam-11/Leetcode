@@ -5,13 +5,13 @@ public:
     {
         unordered_map<int, int> mp;
         unordered_map<int, int> mp1;
-        unordered_map<int, int> mp2;
+        // unordered_map<int, int> mp2;
         for (int i = 0; i < nums1.size(); i++)
         {
             mp[nums1[i]]++;
             mp[nums2[i]]++;
             mp1[nums1[i]]++;
-            mp2[nums2[i]]++;
+            // mp2[nums2[i]]++;
         }
         for (auto i : mp)
         {
@@ -23,7 +23,7 @@ public:
         {
             
             int first = mp1[i.first];
-            int second = mp2[i.first];
+            int second = i.second - mp1[i.first];
             ops += abs(first - second) / 2;
         }
         return ops/2;
