@@ -29,7 +29,7 @@ public:
             for (int j = 0; j < grid[0].size(); j++)
             {
                 p[i][j] = (prefix[i][j] * suffix[i][j]) % 12345;
-                cout<<suffix[i][j]<<endl;
+                // cout<<suffix[i][j]<<endl;
             }
         }
         return p;
