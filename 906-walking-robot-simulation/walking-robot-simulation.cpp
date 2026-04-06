@@ -46,7 +46,7 @@ public:
                     res = max(res, a * a + b * b);
                     k--;
                 }
-                res = max(res, a * a + b * b);
+               
             
             }
         }
