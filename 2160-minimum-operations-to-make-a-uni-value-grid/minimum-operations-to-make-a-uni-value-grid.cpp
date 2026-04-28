@@ -1,21 +1,10 @@
 class Solution
 {
-    int moves(vector<int> &nums, int x, int target)
-    {
-        int operations = 0;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            operations += (abs(nums[i] - target) / x);
-        }
-        return operations;
-    }
 
 public:
     int minOperations(vector<vector<int>> &grid, int x)
     {
-        // assumption : the univalued number belongs to the grid
-        // diff between any two number less than x return -1
-        // check median
+
         vector<int> nums;
         for (int i = 0; i < grid.size(); i++)
         {
@@ -31,8 +20,12 @@ public:
             if ((nums[i] - nums[i - 1]) % x != 0)
                 return -1;
         }
-        int result = moves(nums, x, nums[nums.size() / 2]);
-
-        return result;
+        int operations = 0;
+        int median = nums[nums.size()/2];
+        for (int i = 0; i < nums.size(); i++)
+        {
+            operations += (abs(nums[i] - median) / x);
+        }
+        return operations;
     }
 };
