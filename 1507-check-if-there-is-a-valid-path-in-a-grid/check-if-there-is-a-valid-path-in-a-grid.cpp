@@ -33,6 +33,7 @@ public:
                 if (hehe[idx].find(grid[new_Row][new_col]) != hehe[idx].end())
                 {
                     q.push({new_Row, new_col});
+                    visited[new_Row][new_col] = 1;
                     if (new_Row == grid.size() - 1 && new_col == grid[0].size() - 1)
                         return true;
                 }
