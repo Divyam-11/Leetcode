@@ -50,7 +50,7 @@ public:
                 low = mid + 1;
             }
         }
-        cout<<r_index<<" "<<l_index<<endl;
+        
         if(r_index == -1 && l_index == -1) return 0;
         return r_index - l_index + 1;
     }
