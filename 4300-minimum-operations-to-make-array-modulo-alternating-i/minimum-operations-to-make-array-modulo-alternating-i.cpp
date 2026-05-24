@@ -3,13 +3,7 @@ class Solution
 public:
     int minOperations(vector<int> &nums, int k)
     {
-        unordered_map<int, int> evenmp;
-        unordered_map<int, int> oddmp;
-        for (int i = 0; i < nums.size() - 1; i++)
-        {
-            evenmp[nums[i]]++;
-            oddmp[nums[i + 1]]++;
-        }
+
         priority_queue<pair<int, int>> oddpq;
         priority_queue<pair<int, int>> evenpq;
         for (int x = 0; x < k; x++)
