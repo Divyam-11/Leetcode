@@ -10,6 +10,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 |  |
 | ------- |
+| [1732-find-the-highest-altitude](https://github.com/Divyam-11/Leetcode/tree/master/1732-find-the-highest-altitude) |
 | [2161-partition-array-according-to-given-pivot](https://github.com/Divyam-11/Leetcode/tree/master/2161-partition-array-according-to-given-pivot) |
 ## Two Pointers
 |  |
@@ -19,4 +20,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [2161-partition-array-according-to-given-pivot](https://github.com/Divyam-11/Leetcode/tree/master/2161-partition-array-according-to-given-pivot) |
+## Prefix Sum
+|  |
+| ------- |
+| [1732-find-the-highest-altitude](https://github.com/Divyam-11/Leetcode/tree/master/1732-find-the-highest-altitude) |
 <!---LeetCode Topics End-->
