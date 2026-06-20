@@ -6,6 +6,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Math
 |  |
 | ------- |
+| [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
 | [1344-angle-between-hands-of-a-clock](https://github.com/Divyam-11/Leetcode/tree/master/1344-angle-between-hands-of-a-clock) |
 | [1840-maximum-building-height](https://github.com/Divyam-11/Leetcode/tree/master/1840-maximum-building-height) |
 ## Array
@@ -30,4 +31,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1840-maximum-building-height](https://github.com/Divyam-11/Leetcode/tree/master/1840-maximum-building-height) |
+## Linked List
+|  |
+| ------- |
+| [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
+## Recursion
+|  |
+| ------- |
+| [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
 <!---LeetCode Topics End-->
