@@ -5,22 +5,23 @@ public:
     {
         if (unit.size() == 1)
             return {unit[0], unit[0]};
-        // int smallest = INT_MAX, second_smallest = INT_MAX;
-        // for (int i = 0; i < unit.size(); i++)
-        // {
-        //     if (unit[i] < smallest)
-        //     {
-        //         smallest = unit[i];
-        //         second_smallest = smallest;
-        //     }
-        //     else if (unit[i] <= smallest)
-        //     {
-        //         second_smallest = unit[i];
-        //     }
-        // }
-        // return {smallest, second_smallest};
-        sort(unit.begin(), unit.end());
-        return {unit[0], unit[1]};
+        int smallest = INT_MAX, second_smallest = INT_MAX;
+        for (int i = 0; i < unit.size(); i++)
+        {
+            if (unit[i] < smallest)
+            {
+                second_smallest = smallest;
+                smallest = unit[i];
+                
+            }
+            else if (unit[i] <= second_smallest)
+            {
+                second_smallest = unit[i];
+            }
+        }
+        return {smallest, second_smallest};
+        
+        
     }
     long long maxRatings(vector<vector<int>> &units)
     {
