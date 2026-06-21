@@ -1,9 +1,9 @@
 class Solution
 {
 public:
-    int res = 1;
+    
     int getLength(vector<int> &nums)
-    {
+    {   int res = 1;
         for (int i = 0; i < nums.size(); i++)
         {
             unordered_map<int, int> mp;
