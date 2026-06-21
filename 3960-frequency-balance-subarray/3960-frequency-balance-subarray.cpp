@@ -1,52 +1,42 @@
-class Solution {
+class Solution
+{
 public:
-    int getLength(vector<int>& nums) {
-        int n = nums.size();
-        int ans = 1;
-
-        for(int i=0;i<n;i++)
+    int res = 1;
+    int getLength(vector<int> &nums)
+    {
+        for (int i = 0; i < nums.size(); i++)
         {
-            unordered_map<int,int> cnt;
-            unordered_map<int,int> freq;
-
-            int distinct = 0;
-
-            for(int j=i;j<n;j++)
+            unordered_map<int, int> mp;
+            unordered_map<int, int> fp;
+            for (int j = i; j < nums.size(); j++)
             {
-                int x = nums[j];
-
-                int old = cnt[x];
-
-                if(old == 0)
-                    distinct++;
-                else
+                int before = mp[nums[j]];
+                if (before != 0)
+                    fp[before]--;
+                if (fp[before] == 0)
                 {
-                    freq[old]--;
-                    if(freq[old]==0)
-                        freq.erase(old);
+                    fp.erase(before);
                 }
 
-                cnt[x]++;
-                freq[old+1]++;
-
-                if(distinct==1)
+                mp[nums[j]]++;
+                if (mp.size() == 1)
                 {
-                    ans=max(ans,j-i+1);
+                    res = max(res, j - i + 1);
                 }
-                else if(freq.size()==2)
+                int after = mp[nums[j]];
+                fp[after]++;
+                if (fp.size() == 2)
                 {
-                    auto it=freq.begin();
-
-                    int a=it->first;
-                    it++;
-                    int b=it->first;
-
-                    if(a*2==b || b*2==a)
-                        ans=max(ans,j-i+1);
+                    int val1 = (*fp.begin()).first;
+                    int val3 = -1;
+                    if(val1 %2 == 0) val3 = val1/2;
+                    if (fp.find(val1 * 2) != fp.end() || fp.find(val3) != fp.end())
+                    {
+                        res = max(res, j - i + 1);
+                    }
                 }
             }
         }
-
-        return ans;
+        return res;
     }
 };
