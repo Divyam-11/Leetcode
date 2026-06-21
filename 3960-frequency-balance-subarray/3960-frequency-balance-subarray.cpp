@@ -4,10 +4,11 @@ public:
     
     int getLength(vector<int> &nums)
     {   int res = 1;
+                unordered_map<int, int> mp;
+            unordered_map<int, int> fp;
         for (int i = 0; i < nums.size(); i++)
         {
-            unordered_map<int, int> mp;
-            unordered_map<int, int> fp;
+
             for (int j = i; j < nums.size(); j++)
             {
                 int before = mp[nums[j]];
@@ -36,6 +37,8 @@ public:
                     }
                 }
             }
+            mp.clear();
+            fp.clear();
         }
         return res;
     }
