@@ -2,7 +2,12 @@ class Solution {
 public:
     int maxIceCream(vector<int>& costs, int coins) {
         int iceCreams=0;
-     vector<int> mp(1e5+1);
+        int maxCost = 0;
+        for(int i = 0 ;i < costs.size();i++){
+            maxCost = max(maxCost,costs[i]);
+        }
+
+     vector<int> mp(maxCost+1);
      for(int i = 0 ;i < costs.size();i++){
         mp[costs[i]]++;
      }   
