@@ -7,7 +7,7 @@ public:
         for (int i = 0; i < nums.size(); i++)
         {
             unordered_map<int, int> mp;
-            map<int, int> fp;
+            unordered_map<int, int> fp;
             for (int j = i; j < nums.size(); j++)
             {
                 int before = mp[nums[j]];
@@ -28,7 +28,9 @@ public:
                 if (fp.size() == 2)
                 {
                     int val1 = (*fp.begin()).first;
-                    if (fp.find(val1 * 2) != fp.end())
+                    int val3 = -1;
+                    if(val1 %2 == 0) val3 = val1/2;
+                    if (fp.find(val1 * 2) != fp.end() || fp.find(val3) != fp.end())
                     {
                         res = max(res, j - i + 1);
                     }
