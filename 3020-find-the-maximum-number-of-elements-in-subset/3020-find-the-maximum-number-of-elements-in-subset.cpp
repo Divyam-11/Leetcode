@@ -5,14 +5,15 @@ public:
     {
         int res = 1;
         unordered_map<int, int> mp;
-
+        unordered_set<int> st;
         for (int i = 0; i < nums.size(); i++)
         {
             mp[nums[i]]++;
+            st.insert(nums[i]);
         }
         if(mp[1]%2 == 1) res = max(res,mp[1]);
         res = max(res,mp[1]-1);
-        for (auto i : nums)
+        for (auto i : st)
         {
             
             int val = i;
