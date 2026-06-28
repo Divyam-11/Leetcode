@@ -95,6 +95,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## String
 |  |
 | ------- |
+| [0008-string-to-integer-atoi](https://github.com/Divyam-11/Leetcode/tree/master/0008-string-to-integer-atoi) |
 | [1189-maximum-number-of-balloons](https://github.com/Divyam-11/Leetcode/tree/master/1189-maximum-number-of-balloons) |
 ## Dynamic Programming
 |  |
