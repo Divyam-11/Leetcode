@@ -36,6 +36,6 @@ public:
                 }
             }
         }
-        return distance[m-1][n-1];
+        return false;
     }
 };
