@@ -1,43 +1,41 @@
-class Solution {
+class Solution
+{
 public:
-    bool findSafeWalk(vector<vector<int>>& grid, int health) {
-        int m = grid.size(), n = grid[0].size();
+    bool findSafeWalk(vector<vector<int>> &grid, int health)
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+        int row[] = {0, -1, 0, 1};
+        int col[] = {-1, 0, 1, 0};
+        priority_queue<pair<int, pair<int, int>>> q; // {health,{x,y}};
+        vector<vector<int>> distance(m, vector<int>(n, 0));
+        if (grid[0][0] == 1)
+            health--;
+        q.push({health, {0, 0}});
+        while (!q.empty())
+        {
 
-        int initialHealth = health - grid[0][0];
-        if (initialHealth <= 0)
-            return false;
+            int hp = q.top().first;
+            int x = q.top().second.first;
+            int y = q.top().second.second;
 
-        vector<vector<int>> visited(m, vector<int>(n, -1));
-        visited[0][0] = initialHealth;
-
-        queue<tuple<int, int, int>> q;
-        q.push({0, 0, initialHealth});
-
-        int dr[] = {1, -1, 0, 0};
-        int dc[] = {0, 0, 1, -1};
-
-        while (!q.empty()) {
-            auto [r, c, h] = q.front();
-            q.pop();
-
-            if (r == m - 1 && c == n - 1)
+            if (x == m - 1 && y == n - 1)
                 return true;
-
-            for (int i = 0; i < 4; i++) {
-                int nr = r + dr[i];
-                int nc = c + dc[i];
-
-                if (nr >= 0 && nr < m && nc >= 0 && nc < n) {
-                    int newHealth = h - grid[nr][nc];
-
-                    if (newHealth > 0 && newHealth > visited[nr][nc]) {
-                        visited[nr][nc] = newHealth;
-                        q.push({nr, nc, newHealth});
-                    }
+            q.pop();
+            for (int i = 0; i < 4; i++)
+            {
+                int newX = x + row[i];
+                int newY = y + col[i];
+                if (newX < 0 || newY < 0 || newY >= n || newX >= m)
+                    continue;
+                int newHp = hp - grid[newX][newY];
+                if (newHp > distance[newX][newY])
+                {
+                    distance[newX][newY] = newHp;
+                    q.push({newHp, {newX, newY}});
                 }
             }
         }
-
-        return false;
+        return distance[m-1][n-1];
     }
 };
