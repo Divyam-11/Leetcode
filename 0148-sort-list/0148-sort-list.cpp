@@ -30,7 +30,8 @@ public:
         }
         return head->next;
     }
-    ListNode *mergeSort(ListNode *head)
+
+    ListNode *sortList(ListNode *head)
     {
         if (!head)
             return nullptr;
@@ -47,13 +48,8 @@ public:
         }
         ListNode *head2 = slow->next;
         slow->next = nullptr;
-        // cout<<head->val<<" "<<head2->val<<endl;
-        ListNode *left = mergeSort(head);
-        ListNode *right = mergeSort(head2);
+        ListNode *left = sortList(head);
+        ListNode *right = sortList(head2);
         return merge(left, right);
-    }
-    ListNode *sortList(ListNode *head)
-    {
-        return mergeSort(head);
     }
 };
