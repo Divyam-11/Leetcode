@@ -14,6 +14,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0229-majority-element-ii](https://github.com/Divyam-11/Leetcode/tree/master/0229-majority-element-ii) |
+| [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
 | [1732-find-the-highest-altitude](https://github.com/Divyam-11/Leetcode/tree/master/1732-find-the-highest-altitude) |
 | [1833-maximum-ice-cream-bars](https://github.com/Divyam-11/Leetcode/tree/master/1833-maximum-ice-cream-bars) |
 | [1840-maximum-building-height](https://github.com/Divyam-11/Leetcode/tree/master/1840-maximum-building-height) |
@@ -39,6 +40,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Prefix Sum
 |  |
 | ------- |
+| [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
 | [1732-find-the-highest-altitude](https://github.com/Divyam-11/Leetcode/tree/master/1732-find-the-highest-altitude) |
 | [3699-number-of-zigzag-arrays-i](https://github.com/Divyam-11/Leetcode/tree/master/3699-number-of-zigzag-arrays-i) |
 | [3737-count-subarrays-with-majority-element-i](https://github.com/Divyam-11/Leetcode/tree/master/3737-count-subarrays-with-majority-element-i) |
@@ -80,6 +82,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Greedy
 |  |
 | ------- |
+| [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
 | [1833-maximum-ice-cream-bars](https://github.com/Divyam-11/Leetcode/tree/master/1833-maximum-ice-cream-bars) |
 | [1846-maximum-element-after-decreasing-and-rearranging](https://github.com/Divyam-11/Leetcode/tree/master/1846-maximum-element-after-decreasing-and-rearranging) |
 ## Counting Sort
@@ -110,6 +113,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Dynamic Programming
 |  |
 | ------- |
+| [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
 | [3620-network-recovery-pathways](https://github.com/Divyam-11/Leetcode/tree/master/3620-network-recovery-pathways) |
 | [3699-number-of-zigzag-arrays-i](https://github.com/Divyam-11/Leetcode/tree/master/3699-number-of-zigzag-arrays-i) |
 | [3700-number-of-zigzag-arrays-ii](https://github.com/Divyam-11/Leetcode/tree/master/3700-number-of-zigzag-arrays-ii) |
@@ -161,6 +165,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Binary Search
 |  |
 | ------- |
+| [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
 | [2812-find-the-safest-path-in-a-grid](https://github.com/Divyam-11/Leetcode/tree/master/2812-find-the-safest-path-in-a-grid) |
 | [3620-network-recovery-pathways](https://github.com/Divyam-11/Leetcode/tree/master/3620-network-recovery-pathways) |
 ## Union-Find
