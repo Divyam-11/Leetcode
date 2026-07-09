@@ -3,7 +3,7 @@ class Solution
 public:
     vector<bool> pathExistenceQueries(int n, vector<int> &nums, int maxDiff, vector<vector<int>> &queries)
     {
-        vector<bool> res;
+        vector<bool> res(queries.size());
         int par = 0;
         
         unordered_map<int, int> mp; 
@@ -22,9 +22,7 @@ public:
             int u = queries[i][0];
             int v = queries[i][1];
             if (mp[v] == mp[u])
-                res.push_back(true);
-            else
-                res.push_back(false);
+                res[i] = true;
         }
         return res;
     }
