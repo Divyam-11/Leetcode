@@ -17,6 +17,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0229-majority-element-ii](https://github.com/Divyam-11/Leetcode/tree/master/0229-majority-element-ii) |
 | [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
+| [1601-maximum-number-of-achievable-transfer-requests](https://github.com/Divyam-11/Leetcode/tree/master/1601-maximum-number-of-achievable-transfer-requests) |
 | [1732-find-the-highest-altitude](https://github.com/Divyam-11/Leetcode/tree/master/1732-find-the-highest-altitude) |
 | [1833-maximum-ice-cream-bars](https://github.com/Divyam-11/Leetcode/tree/master/1833-maximum-ice-cream-bars) |
 | [1840-maximum-building-height](https://github.com/Divyam-11/Leetcode/tree/master/1840-maximum-building-height) |
@@ -148,6 +149,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Enumeration
 |  |
 | ------- |
+| [1601-maximum-number-of-achievable-transfer-requests](https://github.com/Divyam-11/Leetcode/tree/master/1601-maximum-number-of-achievable-transfer-requests) |
 | [3020-find-the-maximum-number-of-elements-in-subset](https://github.com/Divyam-11/Leetcode/tree/master/3020-find-the-maximum-number-of-elements-in-subset) |
 ## Tree
 |  |
@@ -222,5 +224,10 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Bit Manipulation
 |  |
 | ------- |
+| [1601-maximum-number-of-achievable-transfer-requests](https://github.com/Divyam-11/Leetcode/tree/master/1601-maximum-number-of-achievable-transfer-requests) |
 | [3534-path-existence-queries-in-a-graph-ii](https://github.com/Divyam-11/Leetcode/tree/master/3534-path-existence-queries-in-a-graph-ii) |
+## Backtracking
+|  |
+| ------- |
+| [1601-maximum-number-of-achievable-transfer-requests](https://github.com/Divyam-11/Leetcode/tree/master/1601-maximum-number-of-achievable-transfer-requests) |
 <!---LeetCode Topics End-->
