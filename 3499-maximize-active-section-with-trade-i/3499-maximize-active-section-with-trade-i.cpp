@@ -3,42 +3,34 @@ class Solution
 public:
     int maxActiveSectionsAfterTrade(string s)
     {
-        char c = s[0];
+        int prev_zero_count = -1;
         int freq = 0;
+        int ones_count = 0;
         int res = 0;
-        vector<pair<char, int>> mp;
         for (int i = 0; i < s.size(); i++)
         {
-            if (s[i] == c)
+            if (s[i] == '0')
                 freq++;
-            else
+            if (s[i] == '1' && freq != 0)
             {
-                mp.push_back({c, freq});
-                c = s[i];
-                freq = 1;
-            }
-            if (s[i] == '1')
-                res++;
-        }
-        mp.push_back({c, freq});
-        int prev = -1;
-        int curr = -1;
-        int final_res = 0;
-        for (int i = 0; i < mp.size(); i++)
-        {
-            if (mp[i].first == '0')
-            {
-                if (prev == -1)
+                if (prev_zero_count == -1)
                 {
-                    prev = mp[i].second;
+                    prev_zero_count = freq;
                 }
                 else
                 {
-                    final_res = max(final_res, prev + mp[i].second);
-                    prev = mp[i].second;
+                    res = max(res, freq + prev_zero_count);
+                    prev_zero_count = freq;
                 }
+                freq = 0;
             }
+            if (s[i] == '1')
+                ones_count++;
         }
-        return final_res + res;
+        if (freq != 0 && prev_zero_count != -1)
+        {
+            res = max(res, freq + prev_zero_count);
+        }
+        return res + ones_count;
     }
 };
