@@ -7,6 +7,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
+| [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
 | [0628-maximum-product-of-three-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0628-maximum-product-of-three-numbers) |
 | [1344-angle-between-hands-of-a-clock](https://github.com/Divyam-11/Leetcode/tree/master/1344-angle-between-hands-of-a-clock) |
 | [1840-maximum-building-height](https://github.com/Divyam-11/Leetcode/tree/master/1840-maximum-building-height) |
@@ -105,9 +106,11 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
 | [0025-reverse-nodes-in-k-group](https://github.com/Divyam-11/Leetcode/tree/master/0025-reverse-nodes-in-k-group) |
+| [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
 ## Stack
 |  |
 | ------- |
+| [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
 | [0232-implement-queue-using-stacks](https://github.com/Divyam-11/Leetcode/tree/master/0232-implement-queue-using-stacks) |
 | [1081-smallest-subsequence-of-distinct-characters](https://github.com/Divyam-11/Leetcode/tree/master/1081-smallest-subsequence-of-distinct-characters) |
 ## Design
@@ -156,6 +159,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0008-string-to-integer-atoi](https://github.com/Divyam-11/Leetcode/tree/master/0008-string-to-integer-atoi) |
 | [0017-letter-combinations-of-a-phone-number](https://github.com/Divyam-11/Leetcode/tree/master/0017-letter-combinations-of-a-phone-number) |
 | [0079-word-search](https://github.com/Divyam-11/Leetcode/tree/master/0079-word-search) |
+| [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
 | [1081-smallest-subsequence-of-distinct-characters](https://github.com/Divyam-11/Leetcode/tree/master/1081-smallest-subsequence-of-distinct-characters) |
 | [1189-maximum-number-of-balloons](https://github.com/Divyam-11/Leetcode/tree/master/1189-maximum-number-of-balloons) |
 | [1358-number-of-substrings-containing-all-three-characters](https://github.com/Divyam-11/Leetcode/tree/master/1358-number-of-substrings-containing-all-three-characters) |
