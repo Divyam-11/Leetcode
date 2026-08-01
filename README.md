@@ -8,6 +8,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
 | [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
+| [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 | [0628-maximum-product-of-three-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0628-maximum-product-of-three-numbers) |
 | [1344-angle-between-hands-of-a-clock](https://github.com/Divyam-11/Leetcode/tree/master/1344-angle-between-hands-of-a-clock) |
 | [1840-maximum-building-height](https://github.com/Divyam-11/Leetcode/tree/master/1840-maximum-building-height) |
@@ -31,6 +32,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0079-word-search](https://github.com/Divyam-11/Leetcode/tree/master/0079-word-search) |
 | [0229-majority-element-ii](https://github.com/Divyam-11/Leetcode/tree/master/0229-majority-element-ii) |
 | [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
+| [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 | [0628-maximum-product-of-three-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0628-maximum-product-of-three-numbers) |
 | [1260-shift-2d-grid](https://github.com/Divyam-11/Leetcode/tree/master/1260-shift-2d-grid) |
 | [1331-rank-transform-of-an-array](https://github.com/Divyam-11/Leetcode/tree/master/1331-rank-transform-of-an-array) |
@@ -111,6 +113,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
 | [0025-reverse-nodes-in-k-group](https://github.com/Divyam-11/Leetcode/tree/master/0025-reverse-nodes-in-k-group) |
 | [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
+| [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 ## Stack
 |  |
 | ------- |
@@ -185,6 +188,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
+| [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 | [3336-find-the-number-of-subsequences-with-equal-gcd](https://github.com/Divyam-11/Leetcode/tree/master/3336-find-the-number-of-subsequences-with-equal-gcd) |
 | [3534-path-existence-queries-in-a-graph-ii](https://github.com/Divyam-11/Leetcode/tree/master/3534-path-existence-queries-in-a-graph-ii) |
 | [3620-network-recovery-pathways](https://github.com/Divyam-11/Leetcode/tree/master/3620-network-recovery-pathways) |
@@ -321,4 +325,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1081-smallest-subsequence-of-distinct-characters](https://github.com/Divyam-11/Leetcode/tree/master/1081-smallest-subsequence-of-distinct-characters) |
+## Game Theory
+|  |
+| ------- |
+| [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 <!---LeetCode Topics End-->
