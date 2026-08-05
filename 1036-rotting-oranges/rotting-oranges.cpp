@@ -8,9 +8,7 @@ public:
         queue<pair<int, pair<int, int>>> q;
         int m = grid.size();
         int n = grid[0].size();
-        int total = 0;
         int fresh = 0;
-        int rotten = 0;
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
@@ -21,13 +19,11 @@ public:
                 {
                     q.push({0, {i, j}});
 
-                    rotten++;
                 }
             }
         }
         if (fresh == 0)
             return 0;
-        total = fresh + rotten;
         while (!q.empty())
         {
             int time = q.front().first;
@@ -45,7 +41,6 @@ public:
 
                     grid[newRow][newCol] = 2;
                     q.push({time + 1, {newRow, newCol}});
-                    rotten++;
                     fresh--;
                     if (fresh == 0)
                     {
