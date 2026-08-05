@@ -1,30 +1,46 @@
-class Solution {
+class Solution
+{
 public:
-    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-        int rows = mat.size();
-        int cols= mat[0].size();
-        vector<pair<int, int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        queue<pair<int,int>> q;
-        for(int i=0;i<  rows;i++){
-            for(int j = 0 ; j < cols;j++){
-                if(mat[i][j] == 0 ) q.push({i,j});
-                else mat[i][j] = INT_MAX;
-            }
-        }
-        while(!q.empty()){
-            pair<int,int> cell = q.front();
-            q.pop();
-            int row = cell.first;
-            int col = cell.second;
-            for(pair<int,int> direction : directions){
-                int newRow = row + direction.first;
-                int newCol = col + direction.second;
-                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && mat[newRow][newCol] > mat[row][col] + 1){
-                    mat[newRow][newCol] = mat[row][col] +1;
-                    q.push({newRow,newCol});
+    vector<int> rows = {0, -1, 0, 1};
+    vector<int> cols = {-1, 0, 1, 0};
+    vector<vector<int>> updateMatrix(vector<vector<int>> &mat)
+    {
+        int m = mat.size();
+        int n = mat[0].size();
+        queue<pair<int, pair<int, int>>> q;
+        vector<vector<int>> visited(m, vector<int>(n, INT_MAX));
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (mat[i][j] == 0)
+                {
+                    q.push({0, {i, j}});
+                    visited[i][j] = 0;
                 }
             }
         }
-        return mat;
+        while (!q.empty())
+        {
+            int dis = q.front().first;
+            int x = q.front().second.first;
+            int y = q.front().second.second;
+            q.pop();
+            for (int i = 0; i < 4; i++)
+            {
+                int newRow = x + rows[i];
+                int newCol = y + cols[i];
+                if (newRow < 0 || newCol < 0 || newRow >= m || newCol >= n || mat[newRow][newCol] == 0)
+                {
+                    continue;
+                }
+                if (visited[newRow][newCol] > dis + 1)
+                {
+                    visited[newRow][newCol] = dis + 1;
+                    q.push({dis + 1, {newRow, newCol}});
+                }
+            }
+        }
+        return visited;
     }
 };
