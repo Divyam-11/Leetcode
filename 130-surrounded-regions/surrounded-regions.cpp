@@ -1,50 +1,49 @@
-class Solution {
-private:
-    void dfs(int row, int col, vector<vector<int>> &vis, vector<vector<char>> &mat, int delrow[], int delcol[]) {
-        vis[row][col] = 1;
-        int n = mat.size();
-        int m = mat[0].size();
-        for (int i = 0; i < 4; i++) {
-            int nrow = row + delrow[i];
-            int ncol = col + delcol[i];
-            if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && !vis[nrow][ncol] && mat[nrow][ncol] == 'O') {
-                dfs(nrow, ncol, vis, mat, delrow, delcol);
+class Solution
+{
+public:
+    vector<int> rows = {0, -1, 0, 1};
+    vector<int> cols = {-1, 0, 1, 0};
+    void dfs(int x, int y, vector<vector<char>> &board, int m, int n)
+    {
+        board[x][y] = '*';
+        for (int i = 0; i < 4; i++)
+        {
+            int newRow = x + rows[i];
+            int newCol = y + cols[i];
+            if (newRow < 0 || newCol < 0 || newRow >= m || newCol >= n)
+            {
+                continue;
             }
+            if (board[newRow][newCol] == 'O')
+                dfs(newRow, newCol, board, m, n);
         }
     }
-
-public:
-    void solve(vector<vector<char>>& board) {
-        int delrow[] = {-1, 0, +1, 0};
-        int delcol[] = {0, -1, 0, +1};
-        int n = board.size();
-        int m = board[0].size();
-        vector<vector<int>> vis(n, vector<int>(m, 0));
-
-        // Perform DFS for all 'O's on the border
-        for (int j = 0; j < m; j++) {
-            if (!vis[0][j] && board[0][j] == 'O') {
-                dfs(0, j, vis, board, delrow, delcol);
-            }
-            if (!vis[n-1][j] && board[n-1][j] == 'O') {
-                dfs(n-1, j, vis, board, delrow, delcol);
-            }
+    void solve(vector<vector<char>> &board)
+    {
+        int m = board.size();
+        int n = board[0].size();
+        for (int i = 0; i < n; i++)
+        {
+            if (board[0][i] == 'O')
+                dfs(0, i, board, m, n);
+            if (board[m - 1][i] == 'O')
+                dfs(m - 1, i, board, m, n);
         }
-        for (int i = 0; i < n; i++) {
-            if (!vis[i][0] && board[i][0] == 'O') {
-                dfs(i, 0, vis, board, delrow, delcol);
-            }
-            if (!vis[i][m-1] && board[i][m-1] == 'O') {
-                dfs(i, m-1, vis, board, delrow, delcol);
-            }
+        for (int i = 0; i < m; i++)
+        {
+            if (board[i][0] == 'O')
+                dfs(i, 0, board, m, n);
+            if (board[i][n - 1] == 'O')
+                dfs(i, n - 1, board, m, n);
         }
-
-        // Flip all unvisited 'O's to 'X's
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (!vis[i][j] && board[i][j] == 'O') {
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (board[i][j] == 'O')
                     board[i][j] = 'X';
-                }
+                if (board[i][j] == '*')
+                    board[i][j] = 'O';
             }
         }
     }
