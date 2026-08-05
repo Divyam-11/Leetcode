@@ -1,50 +1,62 @@
 class Solution
 {
 public:
+    vector<int> rows = {0, -1, 0, 1};
+    vector<int> cols = {-1, 0, 1, 0};
     int orangesRotting(vector<vector<int>> &grid)
     {
-        vector<int> row = {0, -1, 0, 1};
-        vector<int> col = {-1, 0, 1, 0};
-        int result = -1;
-        queue<pair<int, int>> q;
-        int fresh_count = 0;
-        for (int i = 0; i < grid.size(); i++)
+        queue<pair<int, pair<int, int>>> q;
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> visited(m, vector<int>(n));
+        int total = 0;
+        int fresh = 0;
+        int rotten = 0;
+        for (int i = 0; i < m; i++)
         {
-            for (int j = 0; j < grid[0].size(); j++)
+            for (int j = 0; j < n; j++)
             {
                 if (grid[i][j] == 1)
-                    fresh_count++;
+                    fresh++;
                 if (grid[i][j] == 2)
-                    q.push({i, j});
+                {
+                    q.push({0, {i, j}});
+                    
+                    visited[i][j] = 1;
+                    rotten++;
+                }
             }
         }
+        if(fresh == 0) return 0;
+        total = fresh + rotten;
         while (!q.empty())
         {
-            int n = q.size();
-            for (int i = 0; i < n; i++)
+            int time = q.front().first;
+            int x = q.front().second.first;
+            int y = q.front().second.second;
+            q.pop();
+            for (int i = 0; i < 4; i++)
             {
-                auto temp = q.front();
-                q.pop();
-                for (int j = 0; j <= 3; j++)
+                int newRow = x + rows[i];
+                int newCol = y + cols[i];
+                if (newRow < 0 || newCol < 0 || newRow >= m || newCol >= n)
+                    continue;
+                if (grid[newRow][newCol] == 1)
                 {
-                    int new_row = temp.first + row[j];
-                    int new_col = temp.second + col[j];
-                    if (new_row < 0 || new_col < 0 || new_row >= grid.size() || new_col >= grid[0].size())
-                        continue;
-                    if (grid[new_row][new_col] == 1)
+                    
+                    grid[newRow][newCol] = 2;
+                    q.push({time + 1, {newRow, newCol}});
+                    visited[newRow][newCol] = 1;
+                    rotten++;
+                    fresh--;
+                    if (fresh == 0)
                     {
-                        grid[new_row][new_col] = 2;
-                        fresh_count--;
-                        q.push({new_row, new_col});
+                        return time + 1;
                     }
                 }
             }
-            result++;
         }
-        if (fresh_count)
-            return -1;
-        if (result == -1)
-            return 0;
-        return result;
+        
+        return -1;
     }
 };
