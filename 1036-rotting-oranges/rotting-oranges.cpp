@@ -8,7 +8,6 @@ public:
         queue<pair<int, pair<int, int>>> q;
         int m = grid.size();
         int n = grid[0].size();
-        vector<vector<int>> visited(m, vector<int>(n));
         int total = 0;
         int fresh = 0;
         int rotten = 0;
@@ -21,13 +20,13 @@ public:
                 if (grid[i][j] == 2)
                 {
                     q.push({0, {i, j}});
-                    
-                    visited[i][j] = 1;
+
                     rotten++;
                 }
             }
         }
-        if(fresh == 0) return 0;
+        if (fresh == 0)
+            return 0;
         total = fresh + rotten;
         while (!q.empty())
         {
@@ -43,10 +42,9 @@ public:
                     continue;
                 if (grid[newRow][newCol] == 1)
                 {
-                    
+
                     grid[newRow][newCol] = 2;
                     q.push({time + 1, {newRow, newCol}});
-                    visited[newRow][newCol] = 1;
                     rotten++;
                     fresh--;
                     if (fresh == 0)
@@ -56,7 +54,7 @@ public:
                 }
             }
         }
-        
+
         return -1;
     }
 };
