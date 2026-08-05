@@ -1,29 +1,31 @@
 class Solution
 {
-private:
-    void dfs(int node,vector<vector<int>> &isConnected, vector<int> &visited)
+public:
+    void dfs(int node, vector<vector<int>> &adjMatrix, vector<int> &visited)
     {
         visited[node] = 1;
-        for (int i = 0; i < isConnected.size(); i++)
+        for (int i = 0; i < adjMatrix.size(); i++)
         {
-        if(isConnected[node][i] == 1 && visited[i] == 0){
-            dfs(i,isConnected,visited);
-        }
-        }
-
-    }
-
-public:
-    int findCircleNum(vector<vector<int>> &isConnected)
-    {
-        int count = 0;
-        vector<int> visited(isConnected.size(),0);
-        for(int i = 0 ; i < visited.size();i++){
-            if(visited[i] == 0){
-            count++;
-            dfs(i,isConnected,visited);
+            if (adjMatrix[node][i])
+            {
+                if (!visited[i])
+                    dfs(i, adjMatrix, visited);
             }
         }
-        return count;
+    }
+    int findCircleNum(vector<vector<int>> &isConnected)
+    {
+        int n = isConnected.size();
+        vector<int> visited(n);
+        int res = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i])
+            {
+                dfs(i, isConnected, visited);
+                res++;
+            }
+        }
+        return res;
     }
 };
