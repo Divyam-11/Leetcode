@@ -1,74 +1,62 @@
 class Solution
 {
 public:
-    bool canRemove = true;
-    void dfs1(int node, vector<vector<int>> &adjList, vector<int> &visited)
+    void dfs(int node, vector<vector<int>> &adjList, vector<int> &infected)
     {
-        if (visited[node])
-            return;
-        visited[node] = true;
-        for (auto i : adjList[node])
-        {
-            if (!visited[i])
-            {
-                dfs1(i, adjList, visited);
-            }
-        }
-    }
-    void dfs2(int node, vector<vector<int>> &adjList, vector<int> &visited, vector<int> &infected)
-    {
-        if (!canRemove)
-            return;
-        if (infected[node])
-        {
-            canRemove = false;
-            return;
-        }
-        if (visited[node])
-            return;
-        visited[node] = true;
 
-        for (auto i : adjList[node])
+        infected[node] = 0;
+        for (auto it : adjList[node])
         {
-
-            dfs2(i, adjList, visited, infected);
+            if(infected[it])
+            dfs(it, adjList, infected);
         }
+        return;
     }
     vector<int> remainingMethods(int n, int k, vector<vector<int>> &invocations)
     {
         vector<vector<int>> adjList(n);
         for (int i = 0; i < invocations.size(); i++)
         {
-            adjList[invocations[i][0]].push_back(invocations[i][1]);
+            int u = invocations[i][0];
+            int v = invocations[i][1];
+            adjList[u].push_back(v);
         }
-        vector<int> visited(n);
+        queue<int> q;
+        q.push(k);
         vector<int> infected(n);
-        dfs1(k, adjList, infected);
-        for (int i = 0; i < n; i++)
+        infected[k] = 1;
+
+        while (!q.empty())
         {
-            if (!infected[i] && !visited[i])
+            int node = q.front();
+            q.pop();
+            for (auto it : adjList[node])
             {
-                dfs2(i, adjList, visited, infected);
-                if (canRemove == false)
-                    break;
-            }
-        }
-        if (canRemove)
-        {
-            vector<int> res;
-            for (int i = 0; i < n; i++)
-            {
-                if (!infected[i])
+                if (!infected[it])
                 {
-                    res.push_back(i);
+                    infected[it] = 1;
+                    q.push(it);
                 }
             }
-            return res;
+        }
+        for (int i = 0; i < invocations.size(); i++)
+        {
+            int u = invocations[i][0];
+            int v = invocations[i][1];
+            adjList[v].push_back(u);
+        }
+        for (int i = 0; i < adjList.size(); i++)
+        {
+            if (!infected[i])
+            {
+                dfs(i, adjList, infected);
+            }
         }
         vector<int> res;
         for (int i = 0; i < n; i++)
         {
-            res.push_back(i);
+            if (infected[i] == 0)
+                res.push_back(i);
         }
         return res;
     }
