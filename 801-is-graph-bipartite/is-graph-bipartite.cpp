@@ -1,19 +1,30 @@
 class Solution
 {
 public:
-    bool dfs(int node, int color, vector<vector<int>> &graph, vector<int> &colors)
+    bool canPlace(int node, vector<vector<int>> &graph, int color, vector<int> &colors)
     {
-        if (colors[node] != -1)
+        for (auto &it : graph[node])
         {
-            return colors[node] == color;
-        }
-        colors[node] = color;
-        for (auto it : graph[node])
-        {
-            if (dfs(it, !color, graph, colors) == false)
+            if (colors[it] == color)
                 return false;
         }
         return true;
+    }
+    bool dfs(int node, int color, vector<vector<int>> &graph, vector<int> &colors)
+    {   
+        if(colors[node] != -1) return true;
+        if (canPlace(node, graph, color, colors))
+        {
+            colors[node] = color;
+            for (auto it : graph[node])
+            {
+                if (!dfs(it, !color, graph, colors))
+                    return false;
+            }
+            return true;
+        }
+
+        return false;
     }
     bool isBipartite(vector<vector<int>> &graph)
     {
