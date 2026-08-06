@@ -1,51 +1,54 @@
-
-class Solution {
-private:
-    void dfs(int row, int col, vector<vector<int>>& grid, vector<vector<int>>& visited, int delRow[], int delCol[]) {
-        visited[row][col] = 1;
-        for (int i = 0; i < 4; i++) {
-            int nrow = row + delRow[i];
-            int ncol = col + delCol[i];
-            if (nrow >= 0 && nrow < grid.size() && ncol >= 0 && ncol < grid[0].size() && !visited[nrow][ncol] && grid[nrow][ncol] == 1) {
-                dfs(nrow, ncol, grid, visited, delRow, delCol);
+class Solution
+{
+public:
+    vector<int> rows = {-1, 0, 1, 0};
+    vector<int> cols = {0, -1, 0, 1};
+    void dfs(int x, int y, vector<vector<int>> &grid, int m, int n)
+    {
+        grid[x][y] = 2;
+        for (int i = 0; i < 4; i++)
+        {
+            int newRow = x + rows[i];
+            int newCol = y + cols[i];
+            if (newRow < 0 || newCol < 0 || newRow >= m || newCol >= n)
+            {
+                continue;
             }
+            if (grid[newRow][newCol] == 1)
+                dfs(newRow, newCol, grid, m, n);
         }
     }
-
-public:
-    int numEnclaves(vector<vector<int>>& grid) {
-        vector<vector<int>> visited(grid.size(), vector<int>(grid[0].size(), 0));
-        int delRow[] = {-1, 0, 1, 0};
-        int delCol[] = {0, -1, 0, 1};
-        int result = 0;
-
-        // Perform DFS for boundary cells
-        for (int i = 0; i < grid[0].size(); i++) {
-            if (!visited[0][i] && grid[0][i] == 1) {
-                dfs(0, i, grid, visited, delRow, delCol);
+    int numEnclaves(vector<vector<int>> &grid)
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+        for (int i = 0; i < m; i++)
+        {
+            if (grid[i][0] == 1)
+            {
+                dfs(i, 0, grid, m, n);
             }
-            if (!visited[grid.size() - 1][i] && grid[grid.size() - 1][i] == 1) {
-                dfs(grid.size() - 1, i, grid, visited, delRow, delCol);
+            if (grid[i][n - 1] == 1)
+            {
+                dfs(i, n - 1, grid, m, n);
             }
         }
-        for (int i = 0; i < grid.size(); i++) {
-            if (!visited[i][0] && grid[i][0] == 1) {
-                dfs(i, 0, grid, visited, delRow, delCol);
-            }
-            if (!visited[i][grid[0].size() - 1] && grid[i][grid[0].size() - 1] == 1) {
-                dfs(i, grid[0].size() - 1, grid, visited, delRow, delCol);
+        for (int i = 0; i < n; i++)
+        {
+            if (grid[0][i] == 1)
+                dfs(0, i, grid, m, n);
+            if (grid[m - 1][i] == 1)
+                dfs(m - 1, i, grid, m, n);
+        }
+        int res = 0;
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (grid[i][j] == 1)
+                    res++;
             }
         }
-
-        // Count the enclaves
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < grid[0].size(); j++) {
-                if (!visited[i][j] && grid[i][j] == 1) {
-                    result++;
-                }
-            }
-        }
-
-        return result;
+        return res;
     }
 };
