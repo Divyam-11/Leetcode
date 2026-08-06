@@ -24,6 +24,7 @@ public:
         }
         if (!flag)
             return 0;
+        set<string> wl(wordList.begin(), wordList.end());
         set<string> st;
         queue<pair<int, string>> q;
         q.push({1, beginWord});
@@ -33,18 +34,21 @@ public:
             int cost = q.front().first;
             string word = q.front().second;
             q.pop();
-            for (int i = 0; i < wordList.size(); i++)
+            for (int i = 0; i < word.size(); i++)
             {
-                if (hamDistance(word, wordList[i]) == 1)
+                char temp = word[i];
+                for (int j = 0; j < 26; j++)
                 {
-                    if (wordList[i] == endWord)
-                        return cost + 1;
-                    if (st.find(wordList[i]) == st.end())
+                    word[i] = j + 'a';
+                    if (wl.find(word) != wl.end() && st.find(word) == st.end())
                     {
-                        st.insert(wordList[i]);
-                        q.push({cost + 1, wordList[i]});
+                        if (word == endWord)
+                            return cost + 1;
+                        q.push({cost + 1, word});
+                        st.insert(word);
                     }
                 }
+                word[i] = temp;
             }
         }
         return 0;
