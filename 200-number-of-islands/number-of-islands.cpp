@@ -1,37 +1,41 @@
 class Solution
 {
-    void dfs(int row, int col, vector<vector<char>> &grid, vector<vector<int>> &isVisited)
-    {
-        if (row < 0 || col < 0 || row >= grid.size() || col >= grid[0].size())
-            return;
-        if (isVisited[row][col] == 1 || grid[row][col] == '0')
-            return;
-        isVisited[row][col] = 1;
-        dfs(row + 1, col, grid, isVisited);
-        dfs(row - 1, col, grid, isVisited);
-        dfs(row, col + 1, grid, isVisited);
-        dfs(row, col - 1, grid, isVisited);
-    }
-
 public:
+    vector<int> rows = {-1, 0, 1, 0};
+    vector<int> cols = {0, -1, 0, 1};
+    void dfs(int x, int y, vector<vector<char>> &grid, int m, int n)
+    {
+        grid[x][y] = '2';
+        for (int i = 0; i < 4; i++)
+        {
+            int newRow = x + rows[i];
+            int newCol = y + cols[i];
+            if (newRow < 0 || newCol < 0 || newRow >= m || newCol >= n)
+            {
+                continue;
+            }
+            if (grid[newRow][newCol] == '1')
+            {
+                dfs(newRow, newCol, grid, m, n);
+            }
+        }
+    }
     int numIslands(vector<vector<char>> &grid)
     {
-        int result = 0;
-        vector<vector<int>> isVisited(grid.size(), vector<int>(grid[0].size(), 0));
+        int m = grid.size();
+        int n = grid[0].size();
+        int count = 0;
         for (int i = 0; i < grid.size(); i++)
         {
             for (int j = 0; j < grid[0].size(); j++)
             {
                 if (grid[i][j] == '1')
                 {
-                    if (!isVisited[i][j])
-                    {
-                        result++;
-                        dfs(i, j, grid, isVisited);
-                    }
+                    dfs(i, j, grid, m, n);
+                    count++;
                 }
             }
         }
-        return result;
+        return count;
     }
 };
