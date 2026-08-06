@@ -25,10 +25,10 @@ public:
         if (!flag)
             return 0;
         set<string> wl(wordList.begin(), wordList.end());
-        set<string> st;
+        
         queue<pair<int, string>> q;
         q.push({1, beginWord});
-        st.insert(beginWord);
+        wl.erase(beginWord);
         while (!q.empty())
         {
             int cost = q.front().first;
@@ -40,12 +40,12 @@ public:
                 for (int j = 0; j < 26; j++)
                 {
                     word[i] = j + 'a';
-                    if (wl.find(word) != wl.end() && st.find(word) == st.end())
+                    if (wl.find(word) != wl.end())
                     {
                         if (word == endWord)
                             return cost + 1;
                         q.push({cost + 1, word});
-                        st.insert(word);
+                        wl.erase(word);
                     }
                 }
                 word[i] = temp;
