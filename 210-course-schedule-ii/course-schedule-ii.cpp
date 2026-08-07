@@ -1,36 +1,48 @@
-class Solution {
+class Solution
+{
 public:
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> toposort;
-        vector<vector<int>> adjList(numCourses);
-        for (int i = 0; i < prerequisites.size(); i++) {
-            adjList[prerequisites[i][1]].push_back(prerequisites[i][0]);
-        }
-        vector<int> inDegree(numCourses);
-        for (int i = 0; i < adjList.size(); i++) {
-            for (int j = 0; j < adjList[i].size(); j++) {
+    vector<int> topoSort(int n, vector<vector<int>> &adjList)
+    {
+        vector<int> inDegree(n);
+        for (int i = 0; i < adjList.size(); i++)
+        {
+            for (int j = 0; j < adjList[i].size(); j++)
+            {
                 inDegree[adjList[i][j]]++;
             }
         }
+        vector<int> topo;
         queue<int> q;
-        for (int i = 0; i < inDegree.size(); i++) {
-            if (inDegree[i] == 0) {
+        for (int i = 0; i < n; i++)
+        {
+            if (inDegree[i] == 0)
                 q.push(i);
-            }
         }
-        while (!q.empty()) {
-            int temp = q.front();
+        while (!q.empty())
+        {
+            int node = q.front();
+            topo.push_back(node);
             q.pop();
-            toposort.push_back(temp);
-            for (int i = 0; i < adjList[temp].size(); i++) {
-                inDegree[adjList[temp][i]]--;
-                if (inDegree[adjList[temp][i]] == 0) {
-                    q.push(adjList[temp][i]);
-                }
+            for (auto it : adjList[node])
+            {
+                inDegree[it]--;
+                if (inDegree[it] == 0)
+                    q.push(it);
             }
         }
-        if (toposort.size() == numCourses)
-            return toposort;
-        return {};
+        return topo;
+    }
+    vector<int> findOrder(int numCourses, vector<vector<int>> &prerequisites)
+    {
+        vector<vector<int>> adjList(numCourses);
+        for (int i = 0; i < prerequisites.size(); i++)
+        {
+            int u = prerequisites[i][0];
+            int v = prerequisites[i][1];
+            adjList[v].push_back(u);
+        }
+        vector<int> topo = topoSort(numCourses, adjList);
+        if(topo.size() != numCourses) return {};
+        return topo;
     }
 };
