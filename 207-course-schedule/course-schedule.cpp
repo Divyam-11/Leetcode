@@ -1,46 +1,48 @@
 class Solution
 {
-    bool hasCycle(int index, vector<vector<int>> &prerequisites, vector<int> &visited, vector<int> &path_visited)
+public:
+    vector<int> topoSort(int n, vector<vector<int>> &adjList)
     {
-        visited[index] = 1;
-        path_visited[index] = 1;
-
-        for (auto it : prerequisites[index])
+        vector<int> inDegree(n);
+        for (int i = 0; i < adjList.size(); i++)
         {
-            if (!visited[it])
+            for (int j = 0; j < adjList[i].size(); j++)
             {
-                if (hasCycle(it, prerequisites, visited, path_visited))
-                    return true;
-            }
-            else if (path_visited[it])
-            {
-                return true;
+                inDegree[adjList[i][j]]++;
             }
         }
-        path_visited[index] = 0;
-        return false;
+        vector<int> topo;
+        queue<int> q;
+        for (int i = 0; i < n; i++)
+        {
+            if (inDegree[i] == 0)
+                q.push(i);
+        }
+        while (!q.empty())
+        {
+            int node = q.front();
+            topo.push_back(node);
+            q.pop();
+            for (auto it : adjList[node])
+            {
+                inDegree[it]--;
+                if (inDegree[it] == 0)
+                    q.push(it);
+            }
+        }
+        return topo;
     }
-
-public:
     bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
     {
         vector<vector<int>> adjList(numCourses);
-        for (const auto &prereq : prerequisites)
+        for (int i = 0; i < prerequisites.size(); i++)
         {
-            adjList[prereq[1]].push_back(prereq[0]);
+            int u = prerequisites[i][0];
+            int v = prerequisites[i][1];
+            adjList[v].push_back(u);
         }
-        vector<int> visited(numCourses, 0);      // Initialize with numCourses elements, all set to 0
-        vector<int> path_visited(numCourses, 0); // Initialize with numCourses elements, all set to 0
-
-        for (int i = 0; i < numCourses; ++i)
-        {
-            if (!visited[i])
-            {
-                if (hasCycle(i, adjList, visited, path_visited))
-                    return false;
-            }
-        }
-
-        return true;
+        if (topoSort(numCourses, adjList).size() == numCourses)
+            return true;
+        return false;
     }
 };
