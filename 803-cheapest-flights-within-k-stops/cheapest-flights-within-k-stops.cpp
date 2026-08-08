@@ -1,43 +1,41 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
 class Solution
 {
 public:
     int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int k)
     {
-
-        vector<vector<pair<int, int>>> adjList(n);
+        vector<vector<pair<int, int>>> adjList(n); // {node,cost}
         for (int i = 0; i < flights.size(); i++)
         {
-            adjList[flights[i][0]].push_back({flights[i][1], flights[i][2]});
+            int u = flights[i][0];
+            int v = flights[i][1];
+            int cost = flights[i][2];
+            adjList[u].push_back({v, cost});
         }
-
-        // {cost,{node,stops}}
-        queue<pair<int,pair<int,int>>>
-            pq;
-        vector<int> distance(n, INT_MAX);
-        distance[src] = 0;
-        pq.push({0, {src, 0}});
+        vector<int> visited(n, INT_MAX);
+        queue<pair<int, pair<int, int>>> pq; // {cost,{k,node}}
+        pq.push({-1, {0, src}});
+        visited[src] = 0;
         while (!pq.empty())
         {
-            int cost = pq.front().first;
-            int node = pq.front().second.first;
-            int stops = pq.front().second.second;
+            int cost = pq.front().second.first;
+            int kk = pq.front().first;
+            int node = pq.front().second.second;
             pq.pop();
-            if (stops > k)
-                continue;
-            for (int i = 0; i < adjList[node].size(); i++)
+            for (auto it : adjList[node])
             {
-                int temp_stops = stops + 1;
-                int temp_cost = adjList[node][i].second + cost;
-
-                if (temp_cost < distance[adjList[node][i].first] && stops <= k)
+                if (cost + it.second < visited[it.first])
                 {
+                    if (kk < k)
                     {
-                        pq.push({temp_cost, {adjList[node][i].first, temp_stops}});
-                        distance[adjList[node][i].first] = temp_cost;
+                        visited[it.first] = cost + it.second;
+                        pq.push({kk + 1, {cost + it.second, it.first}});
                     }
                 }
             }
         }
-        return distance[dst] == INT_MAX ? -1 : distance[dst];
+        return visited[dst] == INT_MAX ? -1 : visited[dst];
     }
 };
