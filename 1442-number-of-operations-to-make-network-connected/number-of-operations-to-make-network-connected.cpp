@@ -1,40 +1,41 @@
 class Solution
 {
+public:
     void dfs(int node, vector<vector<int>> &adjList, vector<int> &visited)
     {
         visited[node] = 1;
-        for (int i = 0; i < adjList[node].size(); i++)
+        for (auto it : adjList[node])
         {
-            if (!visited[adjList[node][i]])
+            if (!visited[it])
             {
-                dfs(adjList[node][i], adjList, visited);
+                dfs(it, adjList, visited);
             }
         }
     }
-
-public:
     int makeConnected(int n, vector<vector<int>> &connections)
     {
-        if (connections.size() < n - 1)
+
+        int edgesCount = connections.size();
+        if (edgesCount < n - 1)
             return -1;
         vector<vector<int>> adjList(n);
-        vector<int> visited(n, 0);
         for (int i = 0; i < connections.size(); i++)
         {
-            adjList[connections[i][0]].push_back(connections[i][1]);
-            adjList[connections[i][1]].push_back(connections[i][0]);
+            int u = connections[i][0];
+            int v = connections[i][1];
+            adjList[u].push_back(v);
+            adjList[v].push_back(u);
         }
-
-        int result = 0;
-        for (int i = 0; i < adjList.size(); i++)
+        int components = 0;
+        vector<int> visited(n);
+        for (int i = 0; i < n; i++)
         {
             if (!visited[i])
             {
-
+                components++;
                 dfs(i, adjList, visited);
-                result++;
             }
         }
-        return result - 1;
+        return components - 1;
     }
 };
