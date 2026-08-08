@@ -3,39 +3,34 @@ class Solution
 public:
     int networkDelayTime(vector<vector<int>> &times, int n, int k)
     {
-        k--;
         vector<vector<pair<int, int>>> adjList(n);
         for (int i = 0; i < times.size(); i++)
         {
-            adjList[times[i][0] - 1].push_back({times[i][1] - 1, times[i][2]});
+            int u = times[i][0]-1;
+            int v = times[i][1]-1;
+            int w = times[i][2];
+            adjList[u].push_back({v, w});
         }
+        k--;
+        vector<int> visited(n, INT_MAX);
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<int> distance(n, INT_MAX);
-        distance[k] = 0;
-        pq.push({0, k}); // {distance, node} in pq and in adjlist {node,weight}'
+        pq.push({0, k});
+        visited[k] = 0;
         while (!pq.empty())
         {
+            int weight = pq.top().first;
             int node = pq.top().second;
-            int dis = pq.top().first;
             pq.pop();
-            for (int i = 0; i < adjList[node].size(); i++)
+            for (auto it : adjList[node])
             {
-                if (dis + adjList[node][i].second < distance[adjList[node][i].first])
+                if (it.second + weight < visited[it.first])
                 {
-                    distance[adjList[node][i].first] = dis + adjList[node][i].second;
-
-                    pq.push({distance[adjList[node][i].first], adjList[node][i].first});
+                    visited[it.first] = it.second + weight;
+                    pq.push({it.second + weight, it.first});
                 }
             }
         }
-        int maxTime = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (distance[i] == INT_MAX)
-                return -1; // If any node is unreachable
-            maxTime = max(maxTime, distance[i]);
-        }
-
-        return maxTime;
+        int res = *max_element(visited.begin(), visited.end());
+        return res == INT_MAX ? -1 : res;
     }
 };
