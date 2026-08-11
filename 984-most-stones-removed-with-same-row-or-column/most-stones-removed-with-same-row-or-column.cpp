@@ -1,72 +1,49 @@
 class Solution
 {
 public:
-    class DisjointSet
-    {
-        vector<int> rank, size, parent;
-
+class DSU
+{
+    vector<int> parent, rank, size;
+    int n;
     public:
-        DisjointSet(int n)
+    DSU(int n)
+    {
+        this->n = n;
+        parent.resize(n);
+        rank.resize(n, 1);
+        size.resize(n, 1);
+        for (int i = 0; i < n; i++)
         {
-            rank.resize(n + 1, 0);
-            size.resize(n + 1, 1);
-            parent.resize(n + 1, 0);
-            for (int i = 0; i <= n; i++)
-            {
-                parent[i] = i;
-            }
+            parent[i] = i;
         }
-
-        int findUPar(int node)
+    }
+    int findUParent(int node)
+    {
+        if (parent[node] == node)
+            return node;
+        return parent[node] = findUParent(parent[node]);
+    }
+    void unionByRank(int u, int v)
+    {
+        int pu = findUParent(u);
+        int pv = findUParent(v);
+        if (pv == pu)
+            return;
+        if (rank[pu] == rank[pv])
         {
-            if (node == parent[node])
-                return node;
-            return parent[node] = findUPar(parent[node]);
+            rank[pu]++;
+            parent[pv] = pu;
         }
-
-        void unionByRank(int u, int v)
+        else if (rank[pu] < rank[pv])
         {
-            int pu = findUPar(u);
-            int pv = findUPar(v);
-            if (pu == pv)
-            {
-                return;
-            }
-            if (rank[pu] == rank[pv])
-            {
-                parent[pv] = pu;
-                rank[pu]++;
-            }
-            else if (rank[pu] > rank[pv])
-            {
-                parent[pv] = pu;
-            }
-            else
-            {
-                parent[pu] = pv;
-            }
+            parent[pu] = pv;
         }
-
-        void unionBySize(int u, int v)
+        else
         {
-            int pu = findUPar(u);
-            int pv = findUPar(v);
-            if (pu == pv)
-            {
-                return;
-            }
-            if (size[pu] >= size[pv])
-            {
-                parent[pv] = pu;
-                size[pu] += size[pv];
-            }
-            else
-            {
-                parent[pu] = pv;
-                size[pv] += size[pu];
-            }
+            parent[pv] = pu;
         }
-    };
+    }
+};
     int removeStones(vector<vector<int>> &stones)
     {
         int maxX = INT_MIN;
@@ -83,7 +60,7 @@ public:
             xs.insert(x);
             ys.insert(y);
         }
-        DisjointSet ds(maxX + maxY + 1);
+        DSU ds(maxX + maxY + 2);
         for (int i = 0; i < stones.size(); i++)
         {
             int x = stones[i][0];
@@ -93,12 +70,12 @@ public:
         int count = 0;
         for (auto i : xs)
         {
-            if (ds.findUPar(i) == i)
+            if (ds.findUParent(i) == i)
                 count++;
         }
         for (auto i : ys)
         {
-            if (ds.findUPar(i + maxX + 1) == i + maxX + 1)
+            if (ds.findUParent(i + maxX + 1) == i + maxX + 1)
                 count++;
         }
         return stone_count - count;
