@@ -1,99 +1,70 @@
-class DisjointSet {
-    vector<int> rank, size, parent;
-
+class Solution
+{
 public:
-    DisjointSet(int n) {
-        rank.resize(n, 0);
-        size.resize(n, 1);
-        parent.resize(n);
-        for (int i = 0; i < n; i++) {
-            parent[i] = i;
+    vector<int> rows = {-1, 0, 1, 0};
+    vector<int> cols = {0, -1, 0, 1};
+    void dfs(int x, int y, vector<vector<int>> &grid, int value)
+    {
+        grid[x][y] = value;
+        for (int i = 0; i < 4; i++)
+        {
+            int newRow = x + rows[i];
+            int newCol = y + cols[i];
+            if (newRow < 0 || newCol < 0 || newRow >= grid.size() || newCol >= grid[0].size())
+                continue;
+            if (grid[newRow][newCol] == 1)
+                dfs(newRow, newCol, grid, value);
         }
     }
-
-    int findUPar(int node) {
-        if (node == parent[node])
-            return node;
-        return parent[node] = findUPar(parent[node]);
-    }
-
-    void unionBySize(int u, int v) {
-        int pu = findUPar(u);
-        int pv = findUPar(v);
-        if (pu == pv) return;
-        if (size[pu] >= size[pv]) {
-            parent[pv] = pu;
-            size[pu] += size[pv];
-        } else {
-            parent[pu] = pv;
-            size[pv] += size[pu];
+    int largestIsland(vector<vector<int>> &grid)
+    {
+        int val = 2;
+        for (int i = 0; i < grid.size(); i++)
+        {
+            for (int j = 0; j < grid[0].size(); j++)
+            {
+                if (grid[i][j] == 1)
+                {
+                    dfs(i, j, grid, val);
+                    val++;
+                }
+            }
         }
-    }
-
-    int getSize(int node) {
-        return size[findUPar(node)];
-    }
-};
-
-class Solution {
-    vector<int> rows = {0, 0, 1, -1};
-    vector<int> columns = {1, -1, 0, 0};
-
-public:
-    int largestIsland(vector<vector<int>> &grid) {
-        int m = grid.size();
-        int n = grid[0].size();
-        DisjointSet ds(m * n);
-        
-        // Step 1: Connect existing 1s using Disjoint Set
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 1) {
-                    for (int k = 0; k < 4; k++) {
-                        int x = i + rows[k];
-                        int y = j + columns[k];
-                        if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == 1) {
-                            ds.unionBySize(i * n + j, x * n + y);
-                        }
+        unordered_map<int, int> area;
+        int res = 0;
+        for (int i = 0; i < grid.size(); i++)
+        {
+            for (int j = 0; j < grid[0].size(); j++)
+            {
+                if (grid[i][j] != 0)
+                    area[grid[i][j]]++;
+                res = max(res, area[grid[i][j]]);
+            }
+        }
+        area[0] = 0;
+        for (int i = 0; i < grid.size(); i++)
+        {
+            for (int j = 0; j < grid[0].size(); j++)
+            {
+                if (grid[i][j] == 0)
+                {
+                    int sum = 1;
+                    unordered_map<int,int> temp;
+                    for (int a = 0; a < 4; a++)
+                    {
+                        int newRow = i + rows[a];
+                        int newCol = j + cols[a];
+                        if (newRow < 0 || newCol < 0 || newRow >= grid.size() || newCol >= grid[0].size() || grid[newRow][newCol] == 0)
+                            continue;
+                        
+                        if(temp[grid[newRow][newCol]] == 0)
+                        sum += area[grid[newRow][newCol]];
+                        temp[grid[newRow][newCol]]++;
                     }
+                    res = max(res, sum);
                 }
             }
         }
-
-        // Step 2: Find the maximum island size before any modification
-        int maxSize = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 1) {
-                    maxSize = max(maxSize, ds.getSize(i * n + j));
-                }
-            }
-        }
-
-        // Step 3: Try changing each 0 to 1 and check the new island size
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 0) {
-                    unordered_map<int, int> connectedComponents;
-                    int newSize = 1; // Counting the flipped 0 itself
-
-                    for (int k = 0; k < 4; k++) {
-                        int x = i + rows[k];
-                        int y = j + columns[k];
-
-                        if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == 1) {
-                            int parent = ds.findUPar(x * n + y);
-                            if (connectedComponents.find(parent) == connectedComponents.end()) {
-                                connectedComponents[parent] = ds.getSize(parent);
-                                newSize += ds.getSize(parent);
-                            }
-                        }
-                    }
-                    maxSize = max(maxSize, newSize);
-                }
-            }
-        }
-
-        return maxSize;
+        return res;
     }
 };
