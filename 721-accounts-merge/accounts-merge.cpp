@@ -70,41 +70,40 @@ public:
     vector<vector<string>> accountsMerge(vector<vector<string>> &accounts)
     {
         int n = accounts.size();
-        DisjointSet ds(n + 1);
         unordered_map<string, int> mp;
-        for (int i = 0; i < accounts.size(); i++)
-        {
-            for (int j = 1; j < accounts[i].size(); j++)
-            {
-                if (mp.find(accounts[i][j]) != mp.end())
-                {
-                    ds.unionByRank(mp[accounts[i][j]], i);
-                }
-                else
-                    mp[accounts[i][j]] = i;
-            }
-        }
-        vector<vector<string>> result(n);
-        for (auto it : mp)
-        {
-            string mail = it.first;
-            int node = ds.findUPar(it.second);
-            result[node].push_back(mail);
-        }
-        vector<vector<string>> ans;
+        unordered_map<int, vector<string>> mpp;
+        DisjointSet DS(n);
+
         for (int i = 0; i < n; i++)
         {
-            if (result[i].size() == 0)
-                continue;
-            sort(result[i].begin(), result[i].end());
-            vector<string> temp;
-            temp.push_back(accounts[i][0]);
-            for (auto it : result[i])
+            string name = accounts[i][0];
+            for (int j = 1; j < accounts[i].size(); j++)
             {
-                temp.push_back(it);
+                string email = accounts[i][j];
+                if (mp.find(email) == mp.end())
+                {
+                    mp[email] = i;
+                }
+                else
+                {
+                    DS.unionByRank(mp[email], i);
+                }
             }
-            ans.push_back(temp);
         }
-        return ans;
+        for (auto it : mp)
+        {
+            int index = DS.findUPar(it.second);
+            mpp[index].push_back(it.first);
+        }
+        vector<vector<string>> result;
+        for (auto it : mpp)
+        {
+            string name = accounts[it.first][0];
+            sort(it.second.begin(), it.second.end());
+            vector<string> temp = it.second;
+            temp.insert(temp.begin(), name);
+            result.push_back(temp);
+        }
+        return result;
     }
 };
