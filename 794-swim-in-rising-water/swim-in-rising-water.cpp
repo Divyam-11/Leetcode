@@ -15,8 +15,7 @@ public:
             int cost = pq.top().first;
             int x = pq.top().second.first;
             int y = pq.top().second.second;
-            if (x == n - 1 && y == n - 1)
-                return cost;
+
             pq.pop();
             for (int i = 0; i < 4; i++)
             {
