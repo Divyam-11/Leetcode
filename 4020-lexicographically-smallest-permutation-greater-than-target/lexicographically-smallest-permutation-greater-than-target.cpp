@@ -12,36 +12,22 @@ public:
                 answer = temp;
             return;
         }
-        if (flag == false)
+        for (char i = 'a'; i <= 'z'; i++)
         {
-            for (char i = target[index]; i <= 'z'; i++)
+            if (flag == false && i < target[index])
+                continue;
+            if (s_freq[i])
             {
-                if (s_freq[i])
+                s_freq[i]--;
+                temp.push_back(i);
+                if (flag || i > target[index])
                 {
-                    s_freq[i]--;
-                    temp.push_back(i);
-                    if (i > target[index])
-                        solve(index + 1, temp, target, s_freq, true);
-                    else
-                        solve(index + 1, temp, target, s_freq, false);
-                    s_freq[i]++;
-                    temp.pop_back();
+                    solve(index + 1, temp, target, s_freq, true);
                 }
-            }
-
-        }
-        else
-        {
-            for (char i = 'a'; i <= 'z'; i++)
-            {
-                if (s_freq[i])
-                {
-                    s_freq[i]--;
-                    temp.push_back(i);
+                else
                     solve(index + 1, temp, target, s_freq, flag);
-                    s_freq[i]++;
-                    temp.pop_back();
-                }
+                temp.pop_back();
+                s_freq[i]++;
             }
         }
     }
