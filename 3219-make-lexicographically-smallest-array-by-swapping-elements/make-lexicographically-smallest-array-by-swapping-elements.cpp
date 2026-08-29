@@ -3,26 +3,35 @@ class Solution
 public:
     vector<int> lexicographicallySmallestArray(vector<int> &nums, int limit)
     {
-        vector<int> sorted_nums = nums;
-        sort(sorted_nums.begin(), sorted_nums.end());
+        vector<int> temp = nums;
+        sort(temp.begin(), temp.end());
         vector<deque<int>> groups;
-        unordered_map<int, int> mp; // {num,group}
-        for (int i = 0; i < sorted_nums.size(); i++)
+        deque<int> tempGroup;
+        unordered_map<int, int> mp;
+        for (int i = 0; i < temp.size(); i++)
         {
-            if (groups.empty() || abs(groups.back().back() - sorted_nums[i]) > limit)
+            
+            if (tempGroup.empty() || abs(tempGroup.back() - temp[i]) <= limit)
             {
-                groups.push_back(deque<int>());
+                tempGroup.push_back(temp[i]);
             }
-            groups.back().push_back(sorted_nums[i]);
-            mp[sorted_nums[i]] = groups.size() - 1;
+            else
+            {
+                groups.push_back(tempGroup);
+                tempGroup.clear();
+                tempGroup.push_back(temp[i]);
+            }
+            mp[temp[i]] = groups.size();
+            
         }
-        // {{1,2,3},{4,5}};
-        vector<int> result(nums.size());
-        for (int i = 0; i < result.size(); i++)
+        if (!tempGroup.empty())
+            groups.push_back(tempGroup);
+        for (int i = 0; i < nums.size(); i++)
         {
-            result[i] = groups[mp[nums[i]]].front();
-            groups[mp[nums[i]]].pop_front();
+            int g = mp[nums[i]];
+            temp[i] = groups[g].front();
+            groups[g].pop_front();
         }
-        return result;
+        return temp;
     }
 };
