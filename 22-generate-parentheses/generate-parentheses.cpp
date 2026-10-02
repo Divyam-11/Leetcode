@@ -1,7 +1,7 @@
 class Solution
 {
 public:
-    void solve(int open, int close, string &temp, vector<string> &st)
+    void solve(int &open, int &close, string &temp, vector<string> &st)
     {
         if (open == 0 && close == 0)
         {
@@ -28,7 +28,8 @@ public:
     {
         string temp;
         vector<string> st;
-        solve(n, n, temp, st);
+        int n2 = n;
+        solve(n,n2 , temp, st);
         return st;
     }
 };
