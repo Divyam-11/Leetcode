@@ -1,11 +1,11 @@
 class Solution
 {
 public:
-    void solve(int open, int close, string &temp, set<string> &st)
+    void solve(int open, int close, string &temp, vector<string> &st)
     {
         if (open == 0 && close == 0)
         {
-            st.insert(temp);
+            st.push_back(temp);
             return;
         }
         if(open > 0){
@@ -27,8 +27,8 @@ public:
     vector<string> generateParenthesis(int n)
     {
         string temp;
-        set<string> st;
+        vector<string> st;
         solve(n, n, temp, st);
-        return vector<string>(st.begin(), st.end());
+        return st;
     }
 };
