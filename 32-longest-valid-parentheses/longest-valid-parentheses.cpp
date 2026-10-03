@@ -3,33 +3,28 @@ class Solution
 public:
     int longestValidParentheses(string s)
     {
+        stack<int> st;
+        st.push(-1);
+
         int res = 0;
-        int i = 0;
-        int open = 0;
-        unordered_map<int, int> mp;
-        mp[0] = -1;
-        for (int j = 0; j < s.size(); j++)
+
+        for (int i = 0; i < s.size(); i++)
         {
-            if (s[j] == '(')
+            if (s[i] == '(')
             {
-
-                open++;
-                mp[open] = j;
+                st.push(i);
             }
-            if (s[j] == ')')
+            else
             {
-                open--;
-                if(mp.find(open) != mp.end())
-                res = max(res, j - mp[open]);
-            }
+                st.pop();
 
-            if (open < 0)
-            {
-                open = 0;
-                mp.clear();
-                mp[0] = j;
+                if (st.empty())
+                    st.push(i);
+                else
+                    res = max(res, i - st.top());
             }
         }
+
         return res;
     }
 };
