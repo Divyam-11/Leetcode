@@ -4,7 +4,6 @@ public:
         int open_count = 0;
         int star_count = 0;
 
-        // Scan from left to right
         for (char c : s) {
             if (c == '(') {
                 open_count++;
@@ -21,11 +20,9 @@ public:
             }
         }
 
-        // Reset counts for scanning from right to left
         open_count = 0;
         star_count = 0;
 
-        // Scan from right to left
         for (int i = s.size() - 1; i >= 0; i--) {
             char c = s[i];
             if (c == ')') {
