@@ -4,25 +4,25 @@ public:
     string removeOuterParentheses(string s)
     {
         string result;
-        stack<char> st;
+        int open = 0;
         for (int i = 0; i < s.size(); i++)
         {
             if (s[i] == '(')
             {
-                if (!st.empty())
+                if (open != 0)
                     result.push_back('(');
-                st.push(s[i]);
+                open++;
             }
             if (s[i] == ')')
             {
-                if (st.size() == 1)
+                if (open == 1)
                 {
-                    st.pop();
+                    open--;
                 }
                 else
                 {
                     result.push_back(')');
-                    st.pop();
+                    open--;
                 }
             }
         }
