@@ -1,25 +1,31 @@
-class Solution {
+class Solution
+{
 public:
-    string removeOuterParentheses(string s) {
+    string removeOuterParentheses(string s)
+    {
         string result;
-        int count = 0;
-        for(int i = 0;i<s.size();i++){
-            if(s[i] == '('){
-                if(count > 0){
+        stack<char> st;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (s[i] == '(')
+            {
+                if (!st.empty())
                     result.push_back('(');
-                    
-                }
-                count++;
+                st.push(s[i]);
             }
-            else{
-                count--;
-                if(count>0){
-                    result.push_back(')');
-
+            if (s[i] == ')')
+            {
+                if (st.size() == 1)
+                {
+                    st.pop();
                 }
-                
+                else
+                {
+                    result.push_back(')');
+                    st.pop();
+                }
             }
         }
-    return result;
+        return result;
     }
 };
