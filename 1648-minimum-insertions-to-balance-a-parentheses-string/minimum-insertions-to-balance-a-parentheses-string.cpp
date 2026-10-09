@@ -4,14 +4,14 @@ public:
     int minInsertions(string s)
     {
         int ops = 0;
-        stack<char> st;
+         int st = 0;
         
         for (int i = 0; i < s.size(); i++)
         {
             if (s[i] == '(')
             {   
                
-                st.push('(');
+                st++;
                 
             }
             else
@@ -19,14 +19,14 @@ public:
                 if (i == s.size() - 1 || s[i + 1] != ')')
                 {
                     ops++;
-                    if(!st.empty())
-                    st.pop();
+                    if(st)
+                    st--;
                     else ops++;
                 }
                 else if (s[i + 1] == ')')
                 {   
-                    if(!st.empty())
-                    st.pop();   
+                    if(st)
+                    st--;   
                     else ops++;
                     i++;
                 }
@@ -34,6 +34,6 @@ public:
         }
         
         
-        return ops + st.size()*2;
+        return ops + st*2;
     }
 };
