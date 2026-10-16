@@ -17,8 +17,8 @@ public:
             temp = max(height[i], temp);
             int mini = min(temp, R[i]);
             int contri = mini - height[i];
-            if (contri >= 0)
-                res += contri;
+            
+            res += contri;
         }
         return res;
     }
