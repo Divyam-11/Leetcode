@@ -10,7 +10,6 @@ public:
             sum += digit;
             n = n / 10;
         }
-        
         return sum;
     }
     int minSwaps(vector<int> &nums)
@@ -26,19 +25,15 @@ public:
         sort(num.begin(), num.end());
         for (int i = 0; i < nums.size(); i++)
         {
-            
             if (nums[i] != num[i].second)
             {
                 int idx = mp[num[i].second];
-                
                 swap(nums[i], nums[idx]);
                 mp[nums[i]] = i;
                 mp[nums[idx]] = idx;
                 swaps++;
             }
-           
         }
-
-        return swaps;
+    return swaps;
     }
 };
