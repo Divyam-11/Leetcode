@@ -24,7 +24,7 @@ public:
             {
                 if (visited[i][j] == 0 && grid[i][j] != 0)
                 {   
-                    cout<<grid[i][j]<<endl;
+                    
                     int total = 0;
                     dfs(i, j, grid, visited, total,k);
                     if (total % k == 0)
