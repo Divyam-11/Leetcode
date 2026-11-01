@@ -8,6 +8,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0002-add-two-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0002-add-two-numbers) |
 | [0224-basic-calculator](https://github.com/Divyam-11/Leetcode/tree/master/0224-basic-calculator) |
+| [0453-minimum-moves-to-equal-array-elements](https://github.com/Divyam-11/Leetcode/tree/master/0453-minimum-moves-to-equal-array-elements) |
 | [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 | [0628-maximum-product-of-three-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0628-maximum-product-of-three-numbers) |
 | [1344-angle-between-hands-of-a-clock](https://github.com/Divyam-11/Leetcode/tree/master/1344-angle-between-hands-of-a-clock) |
@@ -32,6 +33,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0079-word-search](https://github.com/Divyam-11/Leetcode/tree/master/0079-word-search) |
 | [0229-majority-element-ii](https://github.com/Divyam-11/Leetcode/tree/master/0229-majority-element-ii) |
 | [0410-split-array-largest-sum](https://github.com/Divyam-11/Leetcode/tree/master/0410-split-array-largest-sum) |
+| [0453-minimum-moves-to-equal-array-elements](https://github.com/Divyam-11/Leetcode/tree/master/0453-minimum-moves-to-equal-array-elements) |
 | [0486-predict-the-winner](https://github.com/Divyam-11/Leetcode/tree/master/0486-predict-the-winner) |
 | [0628-maximum-product-of-three-numbers](https://github.com/Divyam-11/Leetcode/tree/master/0628-maximum-product-of-three-numbers) |
 | [1260-shift-2d-grid](https://github.com/Divyam-11/Leetcode/tree/master/1260-shift-2d-grid) |
