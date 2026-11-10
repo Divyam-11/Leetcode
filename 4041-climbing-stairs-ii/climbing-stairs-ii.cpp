@@ -3,21 +3,25 @@ class Solution
 public:
     int climbStairs(int n, vector<int> &costs)
     {
-        vector<int> dp(costs.size()+1,0);
-        for (int j = 1; j <= costs.size(); j++)
-        {   
-           
-            int temp_cost = INT_MAX;    
-            for (int k = 1; k <= 3; k++)
-            {   
-                int i = j - k;
-                if(i < 0) break;
-                
-                int temp = dp[i] + costs[j-1] + (j-i)*(j-i);
-                temp_cost = min(temp,temp_cost);
-            }
-            dp[j] = temp_cost;
+        vector<int> dp(costs.size()+1);
 
+        dp[0] = 0;
+        for (int i = 1; i < dp.size(); i++)
+        {
+            int res = INT_MAX;
+            if (i - 1 >= 0)
+            {
+                res = min(res, dp[i - 1] + costs[i-1] + 1 * 1);
+            }
+            if (i - 2 >= 0)
+            {
+                res = min(res, dp[i - 2] + costs[i-1] + 4);
+            }
+            if (i - 3 >= 0)
+            {
+                res = min(res, dp[i - 3] + costs[i-1] + 9);
+            }
+            dp[i] = res;
         }
         return dp.back();
     }
